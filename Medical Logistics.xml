@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>MedicalLogistics</name>
+        <type>FOM</type>
+        <version>0.2</version>
+        <modificationDate>2019-07-23</modificationDate>
+        <securityClassification>unclassified</securityClassification>
+        <releaseRestriction>TBD by US Government (expected to be "Unlimited Release")</releaseRestriction>
+        <purpose>Modeling medical logistics related to medical evacuation</purpose>
+        <applicationDomain>Training</applicationDomain>
+        <description>The MedicalLogistics module contains the representations related to all medical logistics.  
+
+Representations of Logistics will differ by role level.</description>
+        <useLimitation>The Medical Modeling and Simulation Federation Object Model by Information Visualization and Innovative Research, Inc. is licensed under CC BY-ND 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/4.0/</useLimitation>
+        <poc>
+            <pocType>Technical POC</pocType>
+            <pocName></pocName>
+            <pocOrg>Information Visualization and Innovative Research Inc.</pocOrg>
+            <pocEmail>jets@ivirinc.com</pocEmail>
+        </poc>
+        <reference>
+            <type>FM 4-02.1 - Army Medical Logistics</type>
+            <identification></identification>
+        </reference>
+        <other></other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>SupplyChain</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics></semantics>
+                <attribute>
+                    <name>data</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>name</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>routesData</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creaton or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>userId</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>LogisticsFacility</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics></semantics>
+                <attribute>
+                    <name>address</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>dailyCarbonOutputKg</name>
+                    <dataType>HLAASCIIchar</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>Neither</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>demands</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>energyCost</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>location</name>
+                    <dataType>PhysicalLocationRecord</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>modelUrl</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>name</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>optCost</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>outputs</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>routeDrawType</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>speed</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>storageCapacity</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>stored</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>MedicalKit</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics></semantics>
+                <attribute>
+                    <name>items</name>
+                    <dataType>medicalKitArray</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Treatments from the Physiology module will reference items in a medical kit and decrement the quantity when consumable items are used.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Route</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics></semantics>
+                <attribute>
+                    <name>distance</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Kilometers</semantics>
+                </attribute>
+                <attribute>
+                    <name>distanceMeasureType</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>units of distance.  Typically Kilometers</semantics>
+                </attribute>
+                <attribute>
+                    <name>googleData</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>name</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>sequence</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>speedLimit</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>supplyChainId</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>tolls</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>userId</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>vehiclesPerHour</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Product</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics></semantics>
+                <attribute>
+                    <name>cubeSize</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>name</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>price</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>userId</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>weight</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Vehicle</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>logistics vehicle</semantics>
+                <attribute>
+                    <name>arrival</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>carbonKgPerKm</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>carryVolume</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>carryWeight</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Kilograms</semantics>
+                </attribute>
+                <attribute>
+                    <name>carrying</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>costPerKg</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>crewCost</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>crewSize</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>delay</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>departure</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>KmPerLiter</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>NA</updateType>
+                    <updateCondition></updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>fuel consumption</semantics>
+                </attribute>
+                <attribute>
+                    <name>maxWeight</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>kilograms</semantics>
+                </attribute>
+                <attribute>
+                    <name>name</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>operatingCost</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>integer or float</semantics>
+                </attribute>
+                <attribute>
+                    <name>routeDrawType</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>speed</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>state</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>userId</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+        </interactionClass>
+    </interactions>
+    <switches>
+        <autoProvide isEnabled="true"/>
+        <conveyRegionDesignatorSets isEnabled="false"/>
+        <conveyProducingFederate isEnabled="false"/>
+        <attributeScopeAdvisory isEnabled="false"/>
+        <attributeRelevanceAdvisory isEnabled="false"/>
+        <objectClassRelevanceAdvisory isEnabled="false"/>
+        <interactionRelevanceAdvisory isEnabled="false"/>
+        <serviceReporting isEnabled="false"/>
+        <exceptionReporting isEnabled="false"/>
+        <delaySubscriptionEvaluation isEnabled="false"/>
+        <automaticResignAction resignAction="CancelThenDeleteThenDivest"/>
+    </switches>
+    <dataTypes>
+        <simpleDataTypes/>
+        <enumeratedDataTypes/>
+        <arrayDataTypes>
+            <arrayData>
+                <name>medicalKitArray</name>
+                <dataType>MedicalItemRecord</dataType>
+                <cardinality>Dynamic</cardinality>
+                <encoding>HLAvariableArray</encoding>
+                <semantics>A dynamic length array of medical items</semantics>
+            </arrayData>
+        </arrayDataTypes>
+        <fixedRecordDataTypes>
+            <fixedRecordData>
+                <name>MedicalItemRecord</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>This record describes a single medical item.  Kits are made up of arrays of medical items.</semantics>
+                <field>
+                    <name>name</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Name of the medical item</semantics>
+                </field>
+                <field>
+                    <name>quantity</name>
+                    <dataType>Integer32BE</dataType>
+                    <semantics>Discrete quantity of the medical item</semantics>
+                </field>
+                <field>
+                    <name>partId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>For now, the government issued id for the item.</semantics>
+                </field>
+                <field>
+                    <name>consumable</name>
+                    <dataType>HLAboolean</dataType>
+                    <semantics>Is the item reusable or consumable.</semantics>
+                </field>
+            </fixedRecordData>
+        </fixedRecordDataTypes>
+        <variantRecordDataTypes/>
+    </dataTypes>
+    <notes/>
+</objectModel>

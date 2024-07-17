@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>SimulationControl</name>
+        <type>FOM</type>
+        <version>3a</version>
+        <modificationDate>2020-03-13</modificationDate>
+        <securityClassification>unclassified</securityClassification>
+        <releaseRestriction>TBD by US Government (expected to be "Unlimited Release")</releaseRestriction>
+        <purpose>All monitoring and exercise control</purpose>
+        <applicationDomain>Training</applicationDomain>
+        <description>The SimControl module will include data and commands monitoring the realtime status of a simulation (training exercise) and controlling that simulation.  These functions are often referred to as the "white cell" component of a simulation system.
+
+</description>
+        <useLimitation>The Medical Modeling and Simulation Federation Object Model by Information Visualization and Innovative Research, Inc. is licensed under CC BY-ND 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/4.0/</useLimitation>
+        <poc>
+            <pocType>Technical POC</pocType>
+            <pocName></pocName>
+            <pocOrg>Information Visualization and Innovative Research Inc.</pocOrg>
+            <pocEmail>jets@ivirinc.com</pocEmail>
+        </poc>
+        <other>
+</other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>DateTime</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>The controller federate is responsible for maintaining/updating three perspectives on time:  the simulationElapsedTime, the simulatedDateTime (when the federation is simulating), and currentDateTime (the current time from the system clock).  The simulatedDateTime may not matter for some training events and is optional. 
+ 
+The controller federate is responsible for SimulationControl interactions to start/stop, save/restore and pause/resume. 
+ 
+Saves will be preceded with a pause so that simulations can save their state without executing.</semantics>
+                <attribute>
+                    <name>simulationElapsedTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>simulationElapsedTime - represents the seconds/milliseconds since the start of the execution.  The Start Execution interaction sets the counter to zero and begins the timer while Stop Execution stops the timer from advancing.  The timer cannot be advanced from a Stop Execution.  Pause stops advancing the time while resume starts advancing the timer from its last value.</semantics>
+                </attribute>
+                <attribute>
+                    <name>simulatedDateTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Date and time the federation is simulating… e.g. 11 February, 1979 at 13:42 Zulu.</semantics>
+                </attribute>
+                <attribute>
+                    <name>currentDateTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Current "Real" date and time as might be obtained from a system call.</semantics>
+                </attribute>
+                <attribute>
+                    <name>timeScale</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>If null, default scale of 1:1.  Only positive integers.  X represents an X:1 scaled time advancement.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>DataLog</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Logged data</semantics>
+                <attribute>
+                    <name>time</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Time the data was logged in system time</semantics>
+                </attribute>
+                <attribute>
+                    <name>source</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Name of the federate doing the logging</semantics>
+                </attribute>
+                <attribute>
+                    <name>data</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>A string representing the logged data.  Sender and receiver will be responsible for parsing the string to produce data.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>FederationState</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Federates will subscribe to this class to determine the current state of the federation.  Allows late joiners to discover the current state: 
+ 
+0 - pendingStart; federation is initializing 
+1 - running; federation is executing 
+2 - stopped; federation is stopped.  Execution has ended and will not resume 
+3 - paused; federation is paused.  Wait for running state to begin execution 
+4 - saving; federation is in a saving state.  Wait for running state to begin execution. 
+5 - resuming; federation is in a resuming state.  Wait for running state to begin execution.</semantics>
+                <attribute>
+                    <name>state</name>
+                    <dataType>FederationStateEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Indicator of the current state of the federation.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>FederateData</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>MMS Control Experiment 7/8/21</semantics>
+                <attribute>
+                    <name>id</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>type</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+                <attribute>
+                    <name>payload</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics></semantics>
+                </attribute>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>Start</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Interaction to request simulations begin execution.</semantics>
+            </interactionClass>
+            <interactionClass>
+                <name>Stop</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Interaction to request simulations stop execution.  This is different from a pause.</semantics>
+            </interactionClass>
+            <interactionClass>
+                <name>Pause</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Sent to simulations to request a pause.</semantics>
+            </interactionClass>
+            <interactionClass>
+                <name>Resume</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Resume immediately when interaction is sent.</semantics>
+            </interactionClass>
+            <interactionClass>
+                <name>Save</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Request to initiate a save.</semantics>
+                <parameter>
+                    <name>label</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>The label is a string supplied by the controller federate to allow Saves to be labeled for post execution analysis or restores.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>Restore</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Saved state to restore from.</semantics>
+                <parameter>
+                    <name>label</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>The label is a string supplied by the controller federate to identify which saved state a federate would restore from.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>Synchronize</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Placeholder.</semantics>
+            </interactionClass>
+            <interactionClass>
+                <name>SetTimeScale</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Used to set the timeScale attribute of the DateTime instance.</semantics>
+                <parameter>
+                    <name>scale</name>
+                    <dataType>Integer32BE</dataType>
+                    <semantics>Must be a positive integer representing the scaled time advancement for the federation.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>RestCall</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Experimental class.</semantics>
+                <parameter>
+                    <name>messageId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>toId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>fromId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>callMethod</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>path</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>payload</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>RestResponse</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Experimental class.</semantics>
+                <parameter>
+                    <name>messageId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>toId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>fromId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>responseCode</name>
+                    <dataType>Integer32BE</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>payload</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+            </interactionClass>
+        </interactionClass>
+    </interactions>
+    <switches>
+        <autoProvide isEnabled="true"/>
+        <conveyRegionDesignatorSets isEnabled="false"/>
+        <conveyProducingFederate isEnabled="false"/>
+        <attributeScopeAdvisory isEnabled="false"/>
+        <attributeRelevanceAdvisory isEnabled="false"/>
+        <objectClassRelevanceAdvisory isEnabled="false"/>
+        <interactionRelevanceAdvisory isEnabled="false"/>
+        <serviceReporting isEnabled="false"/>
+        <exceptionReporting isEnabled="false"/>
+        <delaySubscriptionEvaluation isEnabled="false"/>
+        <automaticResignAction resignAction="CancelThenDeleteThenDivest"/>
+    </switches>
+    <dataTypes>
+        <basicDataRepresentations/>
+        <simpleDataTypes/>
+        <enumeratedDataTypes>
+            <enumeratedData>
+                <name>FederationStateEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Indicates current state of the federation.   Late joiners will be able to determine the current state of the federation upon joining.</semantics>
+                <enumerator>
+                    <name>pendingStart</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>running</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>stopped</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>paused</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>saving</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>resuming</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
+        </enumeratedDataTypes>
+        <arrayDataTypes/>
+        <fixedRecordDataTypes/>
+        <variantRecordDataTypes/>
+    </dataTypes>
+    <notes/>
+</objectModel>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>TransferPatient</name>
+        <type>FOM</type>
+        <version>0.2</version>
+        <modificationDate>2019-07-22</modificationDate>
+        <securityClassification>unclassified</securityClassification>
+        <releaseRestriction>TBD by US Government (expected to be "Unlimited Release")</releaseRestriction>
+        <purpose>To model data exchanges related to the actual transfer PROCESS of transporting patients.</purpose>
+        <applicationDomain>Training</applicationDomain>
+        <description>
+</description>
+        <useLimitation>The Medical Modeling and Simulation Federation Object Model by Information Visualization and Innovative Research, Inc. is licensed under CC BY-ND 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/4.0/</useLimitation>
+        <poc>
+            <pocType>Technical POC</pocType>
+            <pocName></pocName>
+            <pocOrg>Information Visualization and Innovative Research Inc.</pocOrg>
+            <pocEmail>jets@ivirinc.com</pocEmail>
+        </poc>
+        <reference>
+            <type>https://military-medicine.com/article/3083-forward-medical-evacuation.html</type>
+            <identification></identification>
+        </reference>
+        <reference>
+            <type>DOD INSTRUCTION 6000.11 - PATIENT MOVEMENT (PM) </type>
+            <identification></identification>
+        </reference>
+        <other></other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>Doctrine</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Placeholder.</semantics>
+                <objectClass>
+                    <name>GroundEvacuation</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Placeholder.</semantics>
+                </objectClass>
+                <objectClass>
+                    <name>AirEvacuation</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Placeholder.</semantics>
+                </objectClass>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>MedicalEvacuationRequest</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Federation communication to request the start of a medical evacuation simulation, does not replace the 9-line report.</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </parameter>
+                <parameter>
+                    <name>transportType</name>
+                    <dataType>TransportTypeEnum</dataType>
+                    <semantics>The type of evacuation transport vehicle requested.</semantics>
+                </parameter>
+                <parameter>
+                    <name>siteName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Name of destination for current route.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>MedicalEvacuationStatus</name>
+                <sharing>Neither</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Status update on evacuation.</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </parameter>
+                <parameter>
+                    <name>medicalEvacuationState</name>
+                    <dataType>MedicalEvacuationStateEnum</dataType>
+                    <semantics>current state of the evacuation</semantics>
+                </parameter>
+                <parameter>
+                    <name>vehicleId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Vehicle id</semantics>
+                </parameter>
+                <parameter>
+                    <name>siteName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Name of destination for current route.</semantics>
+                </parameter>
+                <interactionClass>
+                    <name>MedicalEvacuationUpdate</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>This interaction is used to indicate that the patient is loaded and ready for transport to next role.</semantics>
+                </interactionClass>
+                <interactionClass>
+                    <name>MedicalEvacuationResponse</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>This interaction is used to respond to the medevac request to indicate acknowledgement of the request, vehicle enroute and vehicle arrival.</semantics>
+                </interactionClass>
+            </interactionClass>
+        </interactionClass>
+    </interactions>
+    <switches>
+        <autoProvide isEnabled="true"/>
+        <conveyRegionDesignatorSets isEnabled="false"/>
+        <conveyProducingFederate isEnabled="false"/>
+        <attributeScopeAdvisory isEnabled="false"/>
+        <attributeRelevanceAdvisory isEnabled="false"/>
+        <objectClassRelevanceAdvisory isEnabled="false"/>
+        <interactionRelevanceAdvisory isEnabled="false"/>
+        <serviceReporting isEnabled="false"/>
+        <exceptionReporting isEnabled="false"/>
+        <delaySubscriptionEvaluation isEnabled="false"/>
+        <automaticResignAction resignAction="CancelThenDeleteThenDivest"/>
+    </switches>
+    <dataTypes>
+        <simpleDataTypes/>
+        <enumeratedDataTypes>
+            <enumeratedData>
+                <name>TransportTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Enumeration for the type of evacuation.</semantics>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>ground</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>air</name>
+                    <value>2</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>MedicalEvacuationStateEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>State/Status of the evacuation.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>acknowledgement</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>enroute</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>arrival</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>patientLoaded</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>dropoff</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
+        </enumeratedDataTypes>
+        <arrayDataTypes/>
+        <fixedRecordDataTypes/>
+        <variantRecordDataTypes/>
+    </dataTypes>
+    <notes/>
+</objectModel>

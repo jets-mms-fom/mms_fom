@@ -1,0 +1,2562 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>Patient</name>
+        <type>FOM</type>
+        <version>3a</version>
+        <modificationDate>2020-03-13</modificationDate>
+        <securityClassification>Unclassified</securityClassification>
+        <releaseRestriction>TBD by US Government (expected to be "Unlimited Release")</releaseRestriction>
+        <purpose>The Patient Module will be used to model patients, their injuries and the treatments administered to them.</purpose>
+        <applicationDomain>Training</applicationDomain>
+        <description>Patient module: all ground truth data related to the patient. Any data in this module will represent the true patient. Data can be from a physiology engine or instructor input.
+
+Multiple Patient instances may be created.  Each Patient instance may have zero or more injuries and zero or more treatments.  Patient, injuries and treatments are all associated by a unique patientId.
+
+
+
+</description>
+        <useLimitation>The Medical Modeling and Simulation Federation Object Model by Information Visualization and Innovative Research, Inc. is licensed under CC BY-ND 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/4.0/</useLimitation>
+        <poc>
+            <pocType>Technical POC</pocType>
+            <pocName></pocName>
+            <pocOrg>Information Visualization and Innovative Research Inc.</pocOrg>
+            <pocEmail>jets@ivirinc.com</pocEmail>
+        </poc>
+        <other>Resources:  MedBiquitous; Medical Device Innovation Consortium (MDIC) ; SNOMED; Biogears; HUMMOD</other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>Physiology</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Physiology object: ground truth data provided by the physiology engine or equivalent simulator control software. Note that while these variables can be measured and reported by the learner, a different module (comms, instructional) is responsible for accounting for the measured values. Examples: 
+•	heart rate 
+•	respiration rate 
+•	systolic and diastolic blood pressure</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>heartRate</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Beats per minute</semantics>
+                </attribute>
+                <attribute>
+                    <name>diastolicBloodPressure</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>When the attribute is updated</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>mm HG expressed as an integer.</semantics>
+                </attribute>
+                <attribute>
+                    <name>systolicBloodPressure</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>mm HG expressed as an integer</semantics>
+                </attribute>
+                <attribute>
+                    <name>peripheralOxygenSaturation</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>When the attribute is changed</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>SPO2 
+Blood Oxygen Level expressed as real value .80 = 80%</semantics>
+                </attribute>
+                <attribute>
+                    <name>temperatureFahrenheit</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>When the attribute is updated.</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Temperature in degrees Fahrenheit.</semantics>
+                </attribute>
+                <attribute>
+                    <name>respirationEndTidalCarbonDioxide</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Expressed in mmHg.</semantics>
+                </attribute>
+                <attribute>
+                    <name>respirationRate</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Respiration rate expressed in number of breaths per minute.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lungTidalVolume</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Units mL.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lungDeadSpace</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Units mL.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lungTotalCapacity</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Units mL.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lungExpiratoryReserve</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Units mL.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lungInspiratoryReserve</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Units mL.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lungResidualVolume</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Units mL.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Signs</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>A sign is a physical response to an injury or condition. Signs can be noticed externally and can be observed or measured by a provider. 
+ 
+Note that some measurable signs are modeled in the Physiology class.  A "Signs" monitor simulation would need to subscribe to both the Physiology and Signs classes</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>signLocation</name>
+                    <dataType>BodyAreaFineArray</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>May be null. Identifies where a sign is located on the body.</semantics>
+                </attribute>
+                <attribute>
+                    <name>confusion</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Visible signs of confusion that the medic might observe or assess. True/1 = confusion, False/0 = no confusion.</semantics>
+                </attribute>
+                <attribute>
+                    <name>skinColor</name>
+                    <dataType>SkinColorEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Description of the skin complexion due to conditions or injuries. Does not describe the patient’s base skin color, but identifies differences from the base color.</semantics>
+                </attribute>
+                <attribute>
+                    <name>skinRash</name>
+                    <dataType>SkinRashRecord</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>May be null. If rash exists, describes presentation of the rash.</semantics>
+                </attribute>
+                <attribute>
+                    <name>skinMoisture</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Identifies if patient is sweating. True/1 = Sweating, False/0 = not sweating.</semantics>
+                </attribute>
+                <attribute>
+                    <name>cough</name>
+                    <dataType>CoughEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Describes type of cough.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Symptoms</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Symptoms object: Perceived truth about breaks in the normal condition of the body. It is something a patient feels and reports to the provider. The symptom can be measured by a value as rated by the patient. “Worst stomach ache I have ever experienced.” “Pain is a 7 on a scale of 1-10.” For the patient module, these are created by the scenario, instructor, or physiology engine. 
+See Signs class for additional information</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>symptomLocation</name>
+                    <dataType>BodyAreaCoarseArray</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>May be null. Identifies where the patient is feeling the symptom.</semantics>
+                </attribute>
+                <attribute>
+                    <name>dizziness</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Identifies if patient reports dizziness. True/1 = dizzy, False/0 = not dizzy.</semantics>
+                </attribute>
+                <attribute>
+                    <name>nausea</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Identifies if patient reports nausea. True/1 = nausea, False/0 = no nausea.</semantics>
+                </attribute>
+                <attribute>
+                    <name>levelOfPain</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Level of pain 0-10</semantics>
+                </attribute>
+                <attribute>
+                    <name>fatigue</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Identifies if patient reports fatigue. True/1 = fatigue, False/0 = no fatigue.</semantics>
+                </attribute>
+                <attribute>
+                    <name>numbness</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Identifies if patient reports numbness. True/1 = numbness, False/0 = no numbness.</semantics>
+                </attribute>
+                <attribute>
+                    <name>visionDisturbance</name>
+                    <dataType>VisionDisturbanceEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>May be null. If patient experiences issues with their vision, they describe the type of vision they are experiencing to the provider. This only describes differences to normal, baseline vision of the patient.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Injury</name>
+                <sharing>Neither</sharing>
+                <semantics>The operational name of the patient’s injury, along with information describing the severity and effect of the injury on the patient. The effect can be used to adjust the physiology engine model of the patient. 
+ 
+The injurySeverity scale will be translated by the physiology engine into its own variables. Some injuries will require more than a simple severity scale, and those effects are captured in subclasses.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a particular injuryId.</semantics>
+                </attribute>
+                <attribute>
+                    <name>injuryId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On Creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Used to identify a particular injury and related physiological insult.</semantics>
+                </attribute>
+                <attribute>
+                    <name>time</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>This optional attribute indicates the time of injury in simulation elapsed time.  If null, the injury time is current time.</semantics>
+                </attribute>
+                <attribute>
+                    <name>injuryLocation</name>
+                    <dataType>BodyAreaFineArray</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Enumerations of the body locations an injury could occur</semantics>
+                </attribute>
+                <attribute>
+                    <name>injuryType</name>
+                    <dataType>InjuryTypeEnum</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Represents an injury inflicted on a patient using operational or descriptive language.</semantics>
+                </attribute>
+                <attribute>
+                    <name>injuryDescription</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>May be null. A plain text physical description of the injury to provide additional context if needed.</semantics>
+                </attribute>
+                <attribute>
+                    <name>injurySeverity</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Scale 0 to 10 of injury severity, with 1 being minimal severity and 10 being maximum severity. 0 is used for effects that are fully described by a subclass instead.</semantics>
+                </attribute>
+                <objectClass>
+                    <name>HemorrhageInjury</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Sets the hemorrhage rate. Does not require an additional severity score.</semantics>
+                    <attribute>
+                        <name>hemorrhageRate</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The rate of hemorrhage measured in mL per minute</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>BurnInjury</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Describes the parameters of a burn injury. Does not require an additional severity score.</semantics>
+                    <attribute>
+                        <name>totalBodySurfaceArea</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The percentage of body area covered by the burn, expressed as a decimal (0.25 = 25% TBSA)</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>burnType</name>
+                        <dataType>BurnTypeEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Describes the type of burn.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>burnDegree</name>
+                        <dataType>BurnDegreeEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Describes the degree of the burn</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>TissueDamageInjury</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Describes the type of issue damaged in a soft tissue injury. Requires an additional severity score.</semantics>
+                    <attribute>
+                        <name>tissueType</name>
+                        <dataType>TissueTypeEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The type of tissue that is damaged.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>ImmuneResponseInjury</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>This class identifies the general type of immune response to model. Ideally, a specific disease will be selected from InjuryType to allow the engine to model that specific disease. However if that model is not available, this class can be used to indicate a generic type of immune response.</semantics>
+                    <attribute>
+                        <name>immuneTrigger</name>
+                        <dataType>ImmuneTriggerEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Type of immune response.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>RadiationInjury</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Describes the radiation dose. Requires an additional severity score.</semantics>
+                    <attribute>
+                        <name>exposureTime</name>
+                        <dataType>Integer32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The time of exposure to the radiation, expressed in seconds.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>ChemicaIngestionlInjury</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Describes a chemical or poison ingestion. Does not require an additional severity score.</semantics>
+                    <attribute>
+                        <name>chemicalPH</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>pH of the chemical (used instead of identifying the specific chemical to allow for more general reactions).</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>chemicalExposure</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Identifies if the exposure was external (surface contact) or internal (injected or ingested). 0 = external, 1 = internal</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>chemicalDosage</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Dosage of the chemical, expressed in mL or mg</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>EnvenomationInjury</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Describes the venom dose. Does not require an additional severity score.</semantics>
+                    <attribute>
+                        <name>venomType</name>
+                        <dataType>VenomTypeEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The classification of the venom type. The type affects the body’s response to the venom.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>venomDose</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Amount of venom measured in mL or mg.</semantics>
+                    </attribute>
+                </objectClass>
+            </objectClass>
+            <objectClass>
+                <name>Treatment</name>
+                <sharing>Neither</sharing>
+                <semantics>This class is not meant to be published or subscribed.  Rather use the subclasses of MedicationTreatmentl and PhysicalTreatment. 
+ 
+The procedure performed by the medical provider that impacts the patient's physiology. 
+ 
+Each Treatment Instance will have a unique treatmentId.  Once a treatmentId is used, it cannot be reused during an execution.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>injuryId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>May be null.  Associates a treatment with a unique injury or symptom.  If null, indicates that the treatment is not associated with a specific injury... for example, a treatment (oxygen administered to a patient at high altitude) may not be associated with a specific injury.</semantics>
+                </attribute>
+                <attribute>
+                    <name>treatmentId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The treatmentId is a unique value which associates a treatment to an injury and a patient.  Once a treatmentId is created, it cannot be reused during an execution. 
+ 
+Naming Convention: Treatment_uniquevalue</semantics>
+                </attribute>
+                <attribute>
+                    <name>treatmentLocation</name>
+                    <dataType>BodyAreaCoarseArray</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>May be null.  Used to specify what part of the body a treatment is applied to IF a treatment is applied to a specific body location.</semantics>
+                </attribute>
+                <attribute>
+                    <name>treatmentTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>This attribute indicates the time of the treatment in simulation elapsed time.</semantics>
+                </attribute>
+                <objectClass>
+                    <name>MedicationTreatment</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>This class covers items that are given in measured dosages including drugs, fluids and other medications.</semantics>
+                    <attribute>
+                        <name>medicationName</name>
+                        <dataType>HLAASCIIstring</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Specific name of the medication, if needed. May be null.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>administrationRoute</name>
+                        <dataType>MedicationAdministrationRouteEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Route by which the medication is administered.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>dosageValue</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Amount of medication administered.  The base units are mL or mg depending on the medication.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>dosageTimePeriod</name>
+                        <dataType>Integer32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>The time period over which the medication is administered.  If the value is 0, the medication is administered as a bolus.  The base time period is minutes.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>dosageActive</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Indicates if a medication administration (e.g. drip) is active.  True/1 = active, or False/0 = stopped.  If active, the rate calculations continue until the attribute changes to 0.  Bolus dosages will be 0.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>analgesics</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type an analgesic?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>sedation</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a sedative?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>paralytics</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication a paralytic?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>pressers</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a vasopresser?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>overdoseTreatment</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the treatment an overdoseTreatment?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>antiEmetics</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type an anti emetic?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>anaphylaxisTreatment</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type an anaphylaxis?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>respiratoryTreatment</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a respiratory treatment?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>hypoglycemiaTreatment</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a hypoglycemiaTreatment?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>cbrneTreatment</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a CBRNE treatment?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>seizureTreatment</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a seizure treatment?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodProducts</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a blood product?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>nutrition</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a nutrition product?</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>infectionMedication</name>
+                        <dataType>InfectionFunctionEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type for infection?  If yes, select an enumeration.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>clottingMedication</name>
+                        <dataType>ClottingFunctionEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type for clotting?  If yes, select an enumeration.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>cardiacMedication</name>
+                        <dataType>CardiacFunctionEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type for cardiac?  If yes, select an enumeration.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>fluidMedication</name>
+                        <dataType>FluidFunctionEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on create or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Is the medication type a fluid medication?  If yes, select an enumeration.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>PhysicalTreatment</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>This class covers treatments that are physically performed on the patient and may use devices or other equipment to perform the treatment.</semantics>
+                    <attribute>
+                        <name>treatment</name>
+                        <dataType>PhysicalTreatmentTypeEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On Creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Enumeration of the types of physical treatment administered to a patient.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>deviceUsed</name>
+                        <dataType>TreatmentDeviceEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>What device was used to administer the treatment</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>treatmentActive</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Used to identify whether the treatment is active or inactive.  True/1 = Active, False/0 = inactive</semantics>
+                    </attribute>
+                </objectClass>
+            </objectClass>
+            <objectClass>
+                <name>Pathology</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Pathology object: Chronic conditions that are affecting the patient. Examples 
+•	Diabetes type 1 and 2 
+•	Hypertension (chronic)</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a particular pathology. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>PersonalData</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Personal data object: Base characteristics/demographics of the patient. Examples 
+•	age 
+•	weight 
+•	height</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>firstName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>First name of patient.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lastName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Last name of patient.</semantics>
+                </attribute>
+                <attribute>
+                    <name>gender</name>
+                    <dataType>GenderEnum</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Gender of patient.</semantics>
+                </attribute>
+                <attribute>
+                    <name>dateOfBirth</name>
+                    <dataType>DateOfBirthRecord</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Date of Birth of the patient.</semantics>
+                </attribute>
+                <attribute>
+                    <name>weight</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Weight of the patient in pounds.</semantics>
+                </attribute>
+                <attribute>
+                    <name>height</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Height of patient in inches.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Location</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Used to represent the physical location of the patient.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Associates a particular patient with a particular physical location.</semantics>
+                </attribute>
+                <attribute>
+                    <name>location</name>
+                    <dataType>PhysicalLocationRecord</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Representation as Latitude, Longitude, Altitude</semantics>
+                </attribute>
+                <attribute>
+                    <name>facilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Allows a patient to be associated with a facility (fixed or mobile).  At that time, patient location would not be modeled, but facility ID could be used.  Null means patient is not associated with a facility.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>NeurologicalScales</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Neurological scales are tools used by providers to measure certain aspects or responses of a patient. The measure of the scales relies on how the patient presents or describes signs and symptoms.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>glasgowComaScale</name>
+                    <dataType>GlasgowComaScaleRecord</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>GCS is a total of the scores for EyeOpeningResponse + BestVerbalResponse + BestMotorResponse.</semantics>
+                </attribute>
+                <attribute>
+                    <name>levelOfResponse</name>
+                    <dataType>LevelOfResponseEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>AVPU Assessment.</semantics>
+                </attribute>
+                <attribute>
+                    <name>levelOfConsciousness</name>
+                    <dataType>LevelOfConsciousnessEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>General description of the patient's neurological state.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Lab</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Represents lab values that can be measured from the patient. Includes blood analysis, urinalysis, blood gas analysis, and blood type analysis.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>time</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Simulation time that the lab was taken.</semantics>
+                </attribute>
+                <objectClass>
+                    <name>BloodLab</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Blood Lab test.  Some attributes may be null depending on the test administered.</semantics>
+                    <attribute>
+                        <name>bloodSodium</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>potassium</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodChloride</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mEq/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>lactate</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodKetones</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>fattyAcids</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>triglycerides</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodCreatinine</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodUreaNitrogen</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodPhosphate</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>ionizedCalcium</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodGlucose</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>hematocrit</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured as a % from 0 to 100. Express as decimal.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>hemoglobin</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in g/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodPh</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Unitless</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodBicarbonate</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>baseExcess</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>on creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>UrineLab</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Attributes and measured values measured by a urine test. Attributes may be null depending on the particular tests administered. 
+ 
+The datatypes and values associated with each attribute are what would be determined if a full urine lab test was performed.  For simulators using any type of strip, a mapping would need to be performed from what the lab values are, to the values the strip would return.</semantics>
+                    <attribute>
+                        <name>urobilinogen</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in umol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urineGlucose</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bilirubin</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urineKetones</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>specificGravity</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Unitless.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>bloodInUrine</name>
+                        <dataType>Integer32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>measured in RBC/uL (Red Blood cells per micro liter)</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>hemolysis</name>
+                        <dataType>HLAboolean</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Related to reading bloodInUrine; 
+True - blood cells are hemolyzed (damaged); 
+False - blood cells are whole (undamaged)</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urinePh</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Unitless.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>protein</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in g/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>nitrite</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>leukocytes</name>
+                        <dataType>Integer32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>measured in WBC/uL (White Blood cells per micro liter).</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>ascorbicAcid</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urineSodium</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mEq/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urineChloride</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mEq/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urineCreatinine</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urineBicarbonate</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mEq/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>ammonia</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mcg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urinePhosphate</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mg/dL.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>urineUreaNitrogen</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in grams per 24 hours.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>BloodGasLab</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Parameters and measured values measured by a blood gas lab. Some values may be null, as different tests focus on a different subset of these attributes.</semantics>
+                    <attribute>
+                        <name>partialPressureCarbonDioxide</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmHg.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>partialPressureOxygen</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmHg.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>totalOxygenSaturation</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured as a % from 0 to 100. Express as decimal.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>totalCarbonDioxide</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured in mmol/L.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>sulfurDioxide</name>
+                        <dataType>FloatType32BE</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Measured as a % from 0 to 100. Express as decimal.</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>BloodTypeLab</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Results of running the blood lab test.  Default state is unknown.</semantics>
+                    <attribute>
+                        <name>bloodType</name>
+                        <dataType>BloodTypeEnum</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation or change</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Blood Type of the patient</semantics>
+                    </attribute>
+                </objectClass>
+                <objectClass>
+                    <name>RapidAssay</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Rapid Assay labs may be used to quickly identify a number of virus/bacterial infections including: Flu, Strep, HIV, COVID, H1N1, Malaria.</semantics>
+                    <attribute>
+                        <name>testName</name>
+                        <dataType>HLAASCIIstring</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Name of the rapid assay being administered.</semantics>
+                    </attribute>
+                    <attribute>
+                        <name>result</name>
+                        <dataType>HLAASCIIstring</dataType>
+                        <updateType>Conditional</updateType>
+                        <updateCondition>On creation</updateCondition>
+                        <ownership>NoTransfer</ownership>
+                        <sharing>PublishSubscribe</sharing>
+                        <transportation>HLAreliable</transportation>
+                        <order>Receive</order>
+                        <semantics>Result of the rapid assay test administered.</semantics>
+                    </attribute>
+                </objectClass>
+            </objectClass>
+            <objectClass>
+                <name>CreatePatient</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>If multiple federates are interested in multiple patients, this object is an approach to telling which federates should model/observe a particular patient.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>Neither</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>target</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Federate name(s) of the target(s) of this interaction. Multiple federate names separated by commas.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>BodyFluids</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>The body fluids object is the ground truth data regarding various levels of body fluids of the patient. These are quantifiable measures, rather than observations as in the case of signs and symptoms.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
+                <attribute>
+                    <name>bloodVolume</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The current blood volume of the patient, in mL. Is affected by active hemorrhage (loss) and fluid resuscitation (gain). May be null if this quantity is not modeled.</semantics>
+                </attribute>
+                <attribute>
+                    <name>bloodLossRate</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The rate of blood loss in mL/min. While the hemorrhageRate attribute in the HemorrhageInjury class defines the initial injury attribute, this bloodLossRate attribute is reported in real time and reacts to treatments. May be null if this quantity is not modeled or is not part of the scenario.</semantics>
+                </attribute>
+                <attribute>
+                    <name>urineOutputRate</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The rate of urine production, in mL/min. May be null if this quantity is not modeled.</semantics>
+                </attribute>
+                <attribute>
+                    <name>sweatRate</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Amount of fluid lost as sweat, in mL. May be null if this quantity is not modeled.</semantics>
+                </attribute>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>PausePhysiologyEngine</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Used to tell the physiology engine to pause patient modeling for the specific patient patientId</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution. 
+ 
+Unique string ID representing the patient.  Links patient with injury, treatment, transportation</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>ResumePhysiologyEngine</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Used to tell the physiology engine to resume modeling the patient identified by patientId.  If patient is not paused, this interaction will be ignored.</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution. 
+ 
+Unique string ID representing the patient.  Links patient with injury, treatment, transportation</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>CreateSymptoms</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Interaction to tell the PatientSimulator to create a Symptoms object.  These parameters represent the initial conditions of the patient that are outwardly visible or measurable by the trainee. 
+ 
+The PatientSimulator needs to create the Symptoms object in order to update it.</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>patientId uniquely identifies a patient. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </parameter>
+                <parameter>
+                    <name>levelOfConsciousnessGlasgowComaScale</name>
+                    <dataType>GlasgowComaScaleRecord</dataType>
+                    <semantics>Level Of Consciousness is a total of the scores for EyeOpeningResponse + BestVerbalResponse + BestMotorResponse.</semantics>
+                </parameter>
+                <parameter>
+                    <name>levelOfPain</name>
+                    <dataType>Integer32BE</dataType>
+                    <semantics>Level of pain 0-10.</semantics>
+                </parameter>
+                <parameter>
+                    <name>levelOfConsciousnessAvpu</name>
+                    <dataType>LevelOfConsciousnessEnum</dataType>
+                    <semantics>AVPU scale.</semantics>
+                </parameter>
+                <parameter>
+                    <name>bleeding</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Level of bleeding.</semantics>
+                </parameter>
+                <parameter>
+                    <name>respiratoryDistress</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>SMOG breaths per minute &lt;8 or &gt;30.</semantics>
+                </parameter>
+                <parameter>
+                    <name>torsoInjury</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Torso or Chest injury impacting breathing.</semantics>
+                </parameter>
+                <parameter>
+                    <name>confusion</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Visible signs of confusion that the medic might observe or assess.</semantics>
+                </parameter>
+                <parameter>
+                    <name>eye</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Unequal dilated pupils, erratic eye movement.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>RequestLab</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>This interaction could be viewed as a hospital order to perform a lab.  If subscribing federate is not modeling some aspect of patientId, ignore this interaction.</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>patientId identifies a particular patient. 
+patientId must be unique within an execution. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </parameter>
+                <parameter>
+                    <name>labType</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Type of lab being requested</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>LoadPatient</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Interaction to tell the physiology engine to load a patient associated with patientId</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution. 
+ 
+Unique string ID representing the patient.  Links patient with injury, treatment, transportation</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>StartPatient</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Interaction to start modeling the patient state. If simulationElapsedTime is null, the start is immediate.</semantics>
+                <parameter>
+                    <name>simulationElapsedTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <semantics>Simulation Elapsed time to begin patient modeling</semantics>
+                </parameter>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Identifies which patient to start modeling.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>StopPatient</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Interaction to stop modeling the patient state. If simulationElapsedTime is null, the start is immediate.</semantics>
+                <parameter>
+                    <name>simulationElapsedTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <semantics>Simulation Elapsed time to stop patient modeling.  This is an indication that the patient modeling will stop for the duration of the execution.  Different from PausePatient.</semantics>
+                </parameter>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Identifies which patient to stop modeling.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>PausePatient</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Notification to pause (temporarily) modeling a patient. If simulationElapsedTime is null, the pause is immediate.</semantics>
+                <parameter>
+                    <name>simulationElapsedTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <semantics>Simulation Elapsed time to pause patient modeling.  If null, pause is immediate.</semantics>
+                </parameter>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Identifies which patient to pause modeling.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>ResumePatient</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Notification to resume modeling a paused patient. If simulationElapsedTime is null, the resume is immediate.</semantics>
+                <parameter>
+                    <name>simulationElapsedTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <semantics>Simulation Elapsed time to resume patient modeling.  If null, pause is immediate.</semantics>
+                </parameter>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Identifies which patient to resume modeling.</semantics>
+                </parameter>
+            </interactionClass>
+        </interactionClass>
+    </interactions>
+    <switches>
+        <autoProvide isEnabled="true"/>
+        <conveyRegionDesignatorSets isEnabled="false"/>
+        <conveyProducingFederate isEnabled="false"/>
+        <attributeScopeAdvisory isEnabled="false"/>
+        <attributeRelevanceAdvisory isEnabled="false"/>
+        <objectClassRelevanceAdvisory isEnabled="false"/>
+        <interactionRelevanceAdvisory isEnabled="false"/>
+        <serviceReporting isEnabled="false"/>
+        <exceptionReporting isEnabled="false"/>
+        <delaySubscriptionEvaluation isEnabled="false"/>
+        <automaticResignAction resignAction="CancelThenDeleteThenDivest"/>
+    </switches>
+    <dataTypes>
+        <simpleDataTypes/>
+        <enumeratedDataTypes>
+            <enumeratedData>
+                <name>InjuryTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Each InjuryType will have a location and effect associated with it.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>hemorrhage</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>jointDislocation</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>compromisedAirway</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>fracture</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>traumaticBrainInjury</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>laceration</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>pneumothorax</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>tensionPneumothorax</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>hemothorax</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>burn</name>
+                    <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>compartmentPressure</name>
+                    <value>11</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>LevelOfConsciousnessEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Observed level of patient consciousness.</semantics>
+                <enumerator>
+                    <name>normal</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>confused</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>impaired</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>comotose</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>convulsing</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>notBreathing</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>nearDeath</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>dead</name>
+                    <value>7</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>MedicationAdministrationRouteEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Administration routes for administering medication.</semantics>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>intravenousDrip</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>intravenousBolus</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>intramuscular</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>intraosseousDrip</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>intraosseousBolus</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>oral</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>rectal</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>sublingual</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>buccal</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>intradermal</name>
+                    <value>10</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>PhysicalTreatmentTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of physical treatments that can be administered to a patient.</semantics>
+                <enumerator>
+                    <name>openNasalAirway</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>openTrachealAirway</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>stopHemorrhage</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>releaseIntrapleuralPressure</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>stabilizeOrthopedicFracture</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>immobilizeSpine</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>cleanWound</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>elevateHead</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>sealChestWound</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>warmPatient</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>catheterize</name>
+                    <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>ventilationManual</name>
+                    <value>11</value>
+                </enumerator>
+                <enumerator>
+                    <name>chestCompression</name>
+                    <value>12</value>
+                </enumerator>
+                <enumerator>
+                    <name>defibrillate</name>
+                    <value>13</value>
+                </enumerator>
+                <enumerator>
+                    <name>ventilationHyper</name>
+                    <value>14</value>
+                </enumerator>
+                <enumerator>
+                    <name>ventilationPEEP5</name>
+                    <value>15</value>
+                </enumerator>
+                <enumerator>
+                    <name>ventilationPEEP15</name>
+                    <value>16</value>
+                </enumerator>
+                <enumerator>
+                    <name>bandageBurn</name>
+                    <value>17</value>
+                </enumerator>
+                <enumerator>
+                    <name>releaseCompartmentalPressure</name>
+                    <value>18</value>
+                </enumerator>
+                <enumerator>
+                    <name>releaseSkinPressure</name>
+                    <value>19</value>
+                </enumerator>
+                <enumerator>
+                    <name>coverEye</name>
+                    <value>20</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>SkinColorEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Description of skin color based on conditions or injuries.  This is not the patient's base skin tone, but identifies differences from the base tone.</semantics>
+                <enumerator>
+                    <name>normal</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>pallor</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>flush</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>cyanotic</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>CoughEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Description of the type of cough.</semantics>
+                <enumerator>
+                    <name>n_a</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>dry</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>wetWithPhlegm</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>wetWithBlood</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>wetWithoutPhelgm</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>coughWithWheeze</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>paroxysmalCough</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>barkingCough</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>whoopingCough</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>choking</name>
+                    <value>9</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>VisionDisturbanceEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Description of the type of vision anomaly.</semantics>
+                <enumerator>
+                    <name>distanceBlurred</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>nearBlurred</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>diplopiaVertical</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>diplopiaHorizontal</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>halos</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>blindnessPartial</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>blindnessTotal</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>tunnelVision</name>
+                    <value>7</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>BurnTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of burns.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>thermal</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>chemical</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>electrical</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>BurnDegreeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Degrees of burn.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>firstDegree</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>secondDegree</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>thirdDegree</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>TissueTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of tissue that might be injured.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>muscle</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>skin</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>tendon</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>ligament</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>organ</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>fat</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>cartilage</name>
+                    <value>7</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>ImmuneTriggerEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of immunological triggers.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>viral</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>bacterial</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>parasitic</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>airwayAllergen</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>inflammatory</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>VenomTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of venom.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>cytotoxin</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>neurotoxin</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>hemotoxin</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>LevelOfResponseEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>AVPU is a scale used to quickly identify the responsiveness of a patient to various stimuli. 
+ 
+Alert: The patient is fully awake (although not necessarily oriented). This patient will have spontaneously open eyes, will respond to voice (although may be confused) and will have bodily motor function. 
+ 
+Verbal: The patient makes some kind of response when you talk to them, which could be in any of the three component measures of eyes, voice or motor - e.g. patient's eyes open on being asked "Are you OK?". The response could be as little as a grunt, moan, or slight move of a limb when prompted by the voice of the rescuer. 
+ 
+Pain: The patient makes a response on any of the three component measures on the application of pain stimulus, such as a central pain stimulus like a sternal rub or a peripheral stimulus such as squeezing the fingers. A patient with some level of consciousness (a fully conscious patient would not require a pain stimulus) may respond by using their voice, moving their eyes, or moving part of their body (including abnormal posturing). 
+ 
+Unresponsive: Sometimes noted as 'Unconscious'.</semantics>
+                <enumerator>
+                    <name>alert</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>verbal</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>pain</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>unresponsive</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+        </enumeratedDataTypes>
+        <arrayDataTypes/>
+        <fixedRecordDataTypes>
+            <fixedRecordData>
+                <name>DateOfBirthRecord</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>Month, Day and Year of birth. Used to calculate age</semantics>
+                <field>
+                    <name>month</name>
+                    <dataType>Integer32BE</dataType>
+                    <semantics>MM month of birth</semantics>
+                </field>
+                <field>
+                    <name>day</name>
+                    <dataType>Integer32BE</dataType>
+                    <semantics>DD of birth</semantics>
+                </field>
+                <field>
+                    <name>year</name>
+                    <dataType>Integer32BE</dataType>
+                    <semantics>YYYY of birth</semantics>
+                </field>
+            </fixedRecordData>
+            <fixedRecordData>
+                <name>SkinRashRecord</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>Description of the rash.</semantics>
+                <field>
+                    <name>rashRaised</name>
+                    <dataType>HLAboolean</dataType>
+                    <semantics>Indicate if the rash is flat or raised. True/1 = raised. False/0 = not raised.</semantics>
+                </field>
+                <field>
+                    <name>rashUniform</name>
+                    <dataType>HLAboolean</dataType>
+                    <semantics>Indicate if the rash is uniform or spotty. True/1 = uniform. False/0 = spotty.</semantics>
+                </field>
+                <field>
+                    <name>rashScab</name>
+                    <dataType>HLAboolean</dataType>
+                    <semantics>Indicate if the rash has scabbed areas. True/1 = scabbed, False/0 = not scabbed.</semantics>
+                </field>
+            </fixedRecordData>
+        </fixedRecordDataTypes>
+        <variantRecordDataTypes/>
+    </dataTypes>
+    <notes/>
+</objectModel>

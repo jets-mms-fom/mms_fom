@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>Instructional</name>
+        <type>FOM</type>
+        <version>3a</version>
+        <modificationDate>2020-03-13</modificationDate>
+        <securityClassification>unclassified</securityClassification>
+        <releaseRestriction>TBD by US Government (expected to be "Unlimited Release")</releaseRestriction>
+        <purpose>The instructional module will connect the simulations, trainee(s) and the Learning Management System</purpose>
+        <applicationDomain>Training</applicationDomain>
+        <description>The Instructional module will contain data about Instructor/Observer's actions during simulations plus data needed by a Learning Management System (LMS).
+
+</description>
+        <useLimitation>The Medical Modeling and Simulation Federation Object Model by Information Visualization and Innovative Research, Inc. is licensed under CC BY-ND 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/4.0/</useLimitation>
+        <poc>
+            <pocType>Technical POC</pocType>
+            <pocName></pocName>
+            <pocOrg>Information Visualization and Innovative Research Inc.</pocOrg>
+            <pocEmail>jets@ivirinc.com</pocEmail>
+        </poc>
+        <other></other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>Event</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Events may be created at points in the execution.  Each event is a new instance. 
+Events may be created automatically from scenario events or manually inserted by the instructor.  Events can be used to indicate actions taken by a learner that are not treatments, such as putting on gloves.</semantics>
+                <attribute>
+                    <name>time</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Wallclock (epoch) time of the event. 
+ 
+Allows determination of when the event took place in epoch time.</semantics>
+                </attribute>
+                <attribute>
+                    <name>simTime</name>
+                    <dataType>HLAinteger64Time</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Simulation elapsed time the event pertains to.</semantics>
+                </attribute>
+                <attribute>
+                    <name>type</name>
+                    <dataType>EventTypeEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Type provides a basic description of how the event was created or its importance.  Allows a system to better organize and categorize events.</semantics>
+                </attribute>
+                <attribute>
+                    <name>source</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Creation  or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Who created the event (Federate Name).</semantics>
+                </attribute>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Patient the event applies to (may be null).</semantics>
+                </attribute>
+                <attribute>
+                    <name>learnerId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Learner the event applies to (may be null).</semantics>
+                </attribute>
+                <attribute>
+                    <name>instructorId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Instructor the event applies to (may be null).</semantics>
+                </attribute>
+                <attribute>
+                    <name>teamId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Team the event applies to (may be null).</semantics>
+                </attribute>
+                <attribute>
+                    <name>trainingFacilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Used to identify the training facility an Event is associated with.</semantics>
+                </attribute>
+                <attribute>
+                    <name>notes</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Text associated with the event to provide a top level description of the event (may be null).</semantics>
+                </attribute>
+                <attribute>
+                    <name>description</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>A longer description of the contents of the notes attribute.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Learner</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Parameters of learner(s) that an instructional module would need.</semantics>
+                <attribute>
+                    <name>learnerId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Some type of globally unique identifier</semantics>
+                </attribute>
+                <attribute>
+                    <name>lastName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Last name of learner</semantics>
+                </attribute>
+                <attribute>
+                    <name>firstName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>First name of the learner</semantics>
+                </attribute>
+                <attribute>
+                    <name>id_SSAN</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>SSAN or whatever ID is used in the training domain.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Scenario</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Used to both identify and point to a scenario.</semantics>
+                <attribute>
+                    <name>scenarioId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On Creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The scenarioId is used to uniquely identify a particular scenario from the database.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>Instructor</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Parameters of instructor(s) that an instructional module would need.  Each instructor would result in a separate Instructor instance being created.</semantics>
+                <attribute>
+                    <name>instructorId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Some type of globally unique identifier</semantics>
+                </attribute>
+                <attribute>
+                    <name>lastName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Last name of instructor</semantics>
+                </attribute>
+                <attribute>
+                    <name>firstName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>First name of the instructor</semantics>
+                </attribute>
+                <attribute>
+                    <name>id_SSAN</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>SSAN or whatever ID is used in the training domain.</semantics>
+                </attribute>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>RequestTCCC</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Placeholder, to be expanded.</semantics>
+            </interactionClass>
+            <interactionClass>
+                <name>ProvideTCCC</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Placeholder, to be expanded.</semantics>
+                <parameter>
+                    <name>patient</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>An agreed upon name of a pre-defined DD1380 sent to subscribing federate</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>SelectScenario</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>This interaction will be used to identify the particular scenario to be used in the federation execution.</semantics>
+                <parameter>
+                    <name>scenarioName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>The string name of the scenario to be loaded.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>InstructionalStart</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Command to start the Instructional/AAR system for a particular trainingFacilityId.</semantics>
+                <parameter>
+                    <name>trainingFacilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Training facility the instructional system is associated with.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>InstructionalStop</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Command to stop the Instructional/AAR system for a particular trainingFacilityId.</semantics>
+                <parameter>
+                    <name>trainingFacilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Training facility the instructional system is associated with.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>InstructionalPause</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Command to pause the Instructional/AAR system for a particular trainingFacilityId.</semantics>
+                <parameter>
+                    <name>trainingFacilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Training facility the instructional system is associated with.</semantics>
+                </parameter>
+            </interactionClass>
+            <interactionClass>
+                <name>InstructionalResume</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Command to resume the Instructional/AAR system for a particular trainingFacilityId.</semantics>
+                <parameter>
+                    <name>trainingFacilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Training facility the instructional system is associated with.</semantics>
+                </parameter>
+            </interactionClass>
+        </interactionClass>
+    </interactions>
+    <switches>
+        <autoProvide isEnabled="true"/>
+        <conveyRegionDesignatorSets isEnabled="false"/>
+        <conveyProducingFederate isEnabled="false"/>
+        <attributeScopeAdvisory isEnabled="false"/>
+        <attributeRelevanceAdvisory isEnabled="false"/>
+        <objectClassRelevanceAdvisory isEnabled="false"/>
+        <interactionRelevanceAdvisory isEnabled="false"/>
+        <serviceReporting isEnabled="false"/>
+        <exceptionReporting isEnabled="false"/>
+        <delaySubscriptionEvaluation isEnabled="false"/>
+        <automaticResignAction resignAction="CancelThenDeleteThenDivest"/>
+    </switches>
+    <dataTypes>
+        <simpleDataTypes/>
+        <enumeratedDataTypes>
+            <enumeratedData>
+                <name>EventTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>The type of the event being recorded.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>instructorObservation</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>treatment</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>learnerAction</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+        </enumeratedDataTypes>
+        <arrayDataTypes/>
+        <fixedRecordDataTypes/>
+        <variantRecordDataTypes/>
+    </dataTypes>
+    <notes/>
+</objectModel>

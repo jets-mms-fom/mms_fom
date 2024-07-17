@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<objectModel xsi:schemaLocation="http://standards.ieee.org/IEEE1516-2010 http://standards.ieee.org/downloads/1516/1516.2-2010/IEEE1516-DIF-2010.xsd" xmlns="http://standards.ieee.org/IEEE1516-2010" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelIdentification>
+        <name>Facility</name>
+        <type>FOM</type>
+        <version>0.2</version>
+        <modificationDate>2019-07-22</modificationDate>
+        <securityClassification>unclassified</securityClassification>
+        <releaseRestriction>TBD by US Government (expected to be "Unlimited Release")</releaseRestriction>
+        <purpose>To model facilities providing evacuation and enroute medical care</purpose>
+        <applicationDomain>Training</applicationDomain>
+        <description>Used to describe the various facilities offering evacuation and enroute treatment to an injured patient.  
+
+Reference Medical Operations Handbook which describes facility characteristics
+
+Also 
+Army Techniques Publication No. 4-25.13 - Casualty Evacuation</description>
+        <useLimitation>The Medical Modeling and Simulation Federation Object Model by Information Visualization and Innovative Research, Inc. is licensed under CC BY-ND 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/4.0/</useLimitation>
+        <poc>
+            <pocType>Technical POC</pocType>
+            <pocName></pocName>
+            <pocOrg>Information Visualization and Innovative Research Inc.</pocOrg>
+            <pocEmail>jets@ivirinc.com</pocEmail>
+        </poc>
+        <reference>
+            <type>Army Techniques Publication No. 4-25.13 - Casualty Evacuation</type>
+            <identification></identification>
+        </reference>
+        <other></other>
+    </modelIdentification>
+    <objects>
+        <objectClass>
+            <name>HLAobjectRoot</name>
+            <objectClass>
+                <name>PatientMovementItemsEquipment</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Placeholder, to be expanded.</semantics>
+            </objectClass>
+            <objectClass>
+                <name>PatientMovementItemsSupplies</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Placeholder.  Originally meant to represent things like hoists and litters that would stay with the evacuation vehicle.</semantics>
+            </objectClass>
+            <objectClass>
+                <name>PointOfInjury</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Placeholder, to be expanded.</semantics>
+            </objectClass>
+            <objectClass>
+                <name>Facility</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Generally, describes any physical location that can provide medical support.  Ambulances/AE helos are mobile facilities while hospitals are fixed.</semantics>
+                <attribute>
+                    <name>facilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>A unique Identifier for a facility.</semantics>
+                </attribute>
+                <attribute>
+                    <name>entityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On Creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>Subscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Used to associate a RpR Platform entity to a medical platform.</semantics>
+                </attribute>
+                <attribute>
+                    <name>location</name>
+                    <dataType>PhysicalLocationRecord</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Represent the physical location of an entity</semantics>
+                </attribute>
+                <attribute>
+                    <name>maximumLitters</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>on creation</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The maximum number of litters should not change during an execution.  The number of available litters will change as patients are transported.</semantics>
+                </attribute>
+                <attribute>
+                    <name>availableLitters</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>When Platform is created, this value should be set to the value of Max_Litters.  As patients are loaded on litters, this value should be decremented. As patients are offloaded, the value should be incremented.</semantics>
+                </attribute>
+                <attribute>
+                    <name>maximumAmbulatory</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Maximum number of ambulatory patients a vehicle can accommodate.</semantics>
+                </attribute>
+                <attribute>
+                    <name>availableAmbulatory</name>
+                    <dataType>Integer32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Number of currently available ambulatory positions in a vehicle</semantics>
+                </attribute>
+                <objectClass>
+                    <name>Fixed</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>This is the superclass for all fixed hospital facilities.</semantics>
+                    <objectClass>
+                        <name>SectionDepartment</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <semantics>Placeholder.</semantics>
+                    </objectClass>
+                </objectClass>
+                <objectClass>
+                    <name>Mobile</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics>Indicates a medical treatment facility that is mobile (e.g. Ship, Plane, Ambulance).</semantics>
+                    <objectClass>
+                        <name>AirAmbulance</name>
+                        <sharing>Neither</sharing>
+                        <semantics>Any aircraft (fixed or rotary wing) capable of evacuating casualities.</semantics>
+                        <objectClass>
+                            <name>RotaryWing</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <semantics>Rotary wing aircraft capable of evacuating casualities.</semantics>
+                            <objectClass>
+                                <name>Uh60</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                            <objectClass>
+                                <name>Ch47</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                            <objectClass>
+                                <name>Uh1H</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                        </objectClass>
+                        <objectClass>
+                            <name>FixedWing</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <semantics>Fixed wing aircraft used for Aeromedical Evacuation</semantics>
+                            <objectClass>
+                                <name>C130</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                            <objectClass>
+                                <name>C21</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                            <objectClass>
+                                <name>C12</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                        </objectClass>
+                        <objectClass>
+                            <name>VTOL</name>
+                            <sharing>Neither</sharing>
+                            <semantics></semantics>
+                            <objectClass>
+                                <name>V22</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                        </objectClass>
+                    </objectClass>
+                    <objectClass>
+                        <name>GroundAmbulance</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <semantics></semantics>
+                        <objectClass>
+                            <name>M1266A1</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <semantics></semantics>
+                        </objectClass>
+                        <objectClass>
+                            <name>M113A3</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <semantics></semantics>
+                        </objectClass>
+                        <objectClass>
+                            <name>HMMWV</name>
+                            <sharing>Neither</sharing>
+                            <semantics></semantics>
+                            <objectClass>
+                                <name>M996A1</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                            <objectClass>
+                                <name>M997A1</name>
+                                <sharing>PublishSubscribe</sharing>
+                                <semantics></semantics>
+                            </objectClass>
+                        </objectClass>
+                        <objectClass>
+                            <name>M1133</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <semantics></semantics>
+                        </objectClass>
+                    </objectClass>
+                    <objectClass>
+                        <name>SHIP</name>
+                        <sharing>PublishSubscribe</sharing>
+                        <semantics>Ships capable of accepting casualties.</semantics>
+                        <objectClass>
+                            <name>MercyClass</name>
+                            <sharing>PublishSubscribe</sharing>
+                            <semantics></semantics>
+                        </objectClass>
+                    </objectClass>
+                </objectClass>
+                <objectClass>
+                    <name>FirstResponder</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <semantics></semantics>
+                </objectClass>
+            </objectClass>
+        </objectClass>
+    </objects>
+    <interactions>
+        <interactionClass>
+            <name>HLAinteractionRoot</name>
+            <interactionClass>
+                <name>ControlVehicleMovement</name>
+                <sharing>Neither</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Interactions to start, stop, pause and resume vehicle movement.</semantics>
+                <parameter>
+                    <name>facilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>A unique Identifier for a facility.</semantics>
+                </parameter>
+                <interactionClass>
+                    <name>ResumeVehicleMovement</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Used to resume vehicle movement</semantics>
+                </interactionClass>
+                <interactionClass>
+                    <name>PauseVehicleMovement</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Used to pause vehicle movement</semantics>
+                </interactionClass>
+                <interactionClass>
+                    <name>StartVehicleMovement</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Used to start vehicle movement</semantics>
+                </interactionClass>
+                <interactionClass>
+                    <name>StopVehicleMovement</name>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Used to stop vehicle movement</semantics>
+                </interactionClass>
+            </interactionClass>
+        </interactionClass>
+    </interactions>
+    <switches>
+        <autoProvide isEnabled="true"/>
+        <conveyRegionDesignatorSets isEnabled="false"/>
+        <conveyProducingFederate isEnabled="false"/>
+        <attributeScopeAdvisory isEnabled="false"/>
+        <attributeRelevanceAdvisory isEnabled="false"/>
+        <objectClassRelevanceAdvisory isEnabled="false"/>
+        <interactionRelevanceAdvisory isEnabled="false"/>
+        <serviceReporting isEnabled="false"/>
+        <exceptionReporting isEnabled="false"/>
+        <delaySubscriptionEvaluation isEnabled="false"/>
+        <automaticResignAction resignAction="CancelThenDeleteThenDivest"/>
+    </switches>
+    <dataTypes>
+        <simpleDataTypes/>
+        <enumeratedDataTypes/>
+        <arrayDataTypes/>
+        <fixedRecordDataTypes/>
+        <variantRecordDataTypes/>
+    </dataTypes>
+    <notes/>
+</objectModel>
