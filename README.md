@@ -11,4 +11,6 @@ The MMS FOM is currently on Version 2.0.0 with several updates planned for Versi
 
 For more information, please contact jets@ivirinc.com
 
+For additional detail on JETS, see https://jets-systems.com/
+
 This work is licensed under CC BY-ND 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by-nd/4.0/
