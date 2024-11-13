@@ -2,9 +2,9 @@ The MMS FOM is the data dictionary used by the JETS architecture, an HLA-based a
 
 The repository includes xml files for each module within the FOM, along with a PDF that provides a full description of the MMS FOM.
 
-The MMS FOM is currently on Version 2.0.0 with several updates planned for Version 3, including:
+The MMS FOM is currently on Version 3.0.0. Recent changes include
 
-* Improved body location enumerators/attributes
+* Improved body location enumerators/attributes based on the FMA standard
 * New physical injury descriptions
 * Expanded signs and symptoms
 * New learner action classes
