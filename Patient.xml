@@ -29,12 +29,9 @@ Multiple Patient instances may be created.  Each Patient instance may have zero 
         <objectClass>
             <name>HLAobjectRoot</name>
             <objectClass>
-                <name>Physiology</name>
+                <name>VitalSigns</name>
                 <sharing>PublishSubscribe</sharing>
-                <semantics>Physiology object: ground truth data provided by the physiology engine or equivalent simulator control software. Note that while these variables can be measured and reported by the learner, a different module (comms, instructional) is responsible for accounting for the measured values. Examples: 
-•	heart rate 
-•	respiration rate 
-•	systolic and diastolic blood pressure</semantics>
+                <semantics>Physiology vital signs.  Ground truth.</semantics>
                 <attribute>
                     <name>patientId</name>
                     <dataType>HLAASCIIstring</dataType>
@@ -126,6 +123,24 @@ Blood Oxygen Level expressed as real value .80 = 80%</semantics>
                     <order>Receive</order>
                     <semantics>Respiration rate expressed in number of breaths per minute.</semantics>
                 </attribute>
+            </objectClass>
+            <objectClass>
+                <name>RespiratoryPhysiology</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Physiology internal respiratory parameters.  Ground truth.</semantics>
+                <attribute>
+                    <name>patientID</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a particular injuryId. 
+ 
+Once a Patient object is created, the ID is static and cannot be changed or reused during an execution.</semantics>
+                </attribute>
                 <attribute>
                     <name>lungTidalVolume</name>
                     <dataType>Integer32BE</dataType>
@@ -214,7 +229,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                 </attribute>
                 <attribute>
                     <name>signLocation</name>
-                    <dataType>BodyAreaFineArray</dataType>
+                    <dataType>BodyLocationRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -278,6 +293,61 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <order>Receive</order>
                     <semantics>Describes type of cough.</semantics>
                 </attribute>
+                <attribute>
+                    <name>ecgRhythm</name>
+                    <dataType>EcgRhythmEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Identifies the ECG rhythm of the patient (does not draw the waveform).</semantics>
+                </attribute>
+                <attribute>
+                    <name>heartSound</name>
+                    <dataType>HeartSoundEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Describes the patient’s heart sounds.</semantics>
+                </attribute>
+                <attribute>
+                    <name>lungSound</name>
+                    <dataType>LungSoundEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Describes the patient’s lung sounds.</semantics>
+                </attribute>
+                <attribute>
+                    <name>bowelSound</name>
+                    <dataType>BowelSoundEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Describes the patient’s bowel sounds.</semantics>
+                </attribute>
+                <attribute>
+                    <name>pupilSize</name>
+                    <dataType>PupilSizeEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Describes the pupil size.</semantics>
+                </attribute>
             </objectClass>
             <objectClass>
                 <name>Symptoms</name>
@@ -299,7 +369,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                 </attribute>
                 <attribute>
                     <name>symptomLocation</name>
-                    <dataType>BodyAreaCoarseArray</dataType>
+                    <dataType>BodyLocationRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -377,7 +447,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
             </objectClass>
             <objectClass>
                 <name>Injury</name>
-                <sharing>Neither</sharing>
+                <sharing>PublishSubscribe</sharing>
                 <semantics>The operational name of the patient’s injury, along with information describing the severity and effect of the injury on the patient. The effect can be used to adjust the physiology engine model of the patient. 
  
 The injurySeverity scale will be translated by the physiology engine into its own variables. Some injuries will require more than a simple severity scale, and those effects are captured in subclasses.</semantics>
@@ -416,7 +486,7 @@ The injurySeverity scale will be translated by the physiology engine into its ow
                 </attribute>
                 <attribute>
                     <name>injuryLocation</name>
-                    <dataType>BodyAreaFineArray</dataType>
+                    <dataType>BodyLocationRecord</dataType>
                     <updateType>Static</updateType>
                     <updateCondition>On creation</updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -434,10 +504,21 @@ The injurySeverity scale will be translated by the physiology engine into its ow
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Represents an injury inflicted on a patient using operational or descriptive language.</semantics>
+                    <semantics>Physiological type of injury.</semantics>
                 </attribute>
                 <attribute>
                     <name>injuryDescription</name>
+                    <dataType>InjuryDescriptionEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Physical description of injury.</semantics>
+                </attribute>
+                <attribute>
+                    <name>injuryDetail</name>
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
@@ -445,7 +526,7 @@ The injurySeverity scale will be translated by the physiology engine into its ow
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>May be null. A plain text physical description of the injury to provide additional context if needed.</semantics>
+                    <semantics>Additional detail to describe the injury.</semantics>
                 </attribute>
                 <attribute>
                     <name>injurySeverity</name>
@@ -458,173 +539,39 @@ The injurySeverity scale will be translated by the physiology engine into its ow
                     <order>Receive</order>
                     <semantics>Scale 0 to 10 of injury severity, with 1 being minimal severity and 10 being maximum severity. 0 is used for effects that are fully described by a subclass instead.</semantics>
                 </attribute>
-                <objectClass>
-                    <name>HemorrhageInjury</name>
+                <attribute>
+                    <name>mechanismOfInjury</name>
+                    <dataType>MechanismOfInjuryRecord</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Sets the hemorrhage rate. Does not require an additional severity score.</semantics>
-                    <attribute>
-                        <name>hemorrhageRate</name>
-                        <dataType>FloatType32BE</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The rate of hemorrhage measured in mL per minute</semantics>
-                    </attribute>
-                </objectClass>
-                <objectClass>
-                    <name>BurnInjury</name>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Mechanism of injury.</semantics>
+                </attribute>
+                <attribute>
+                    <name>hemorrhageRate</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Describes the parameters of a burn injury. Does not require an additional severity score.</semantics>
-                    <attribute>
-                        <name>totalBodySurfaceArea</name>
-                        <dataType>FloatType32BE</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The percentage of body area covered by the burn, expressed as a decimal (0.25 = 25% TBSA)</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>burnType</name>
-                        <dataType>BurnTypeEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Describes the type of burn.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>burnDegree</name>
-                        <dataType>BurnDegreeEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Describes the degree of the burn</semantics>
-                    </attribute>
-                </objectClass>
-                <objectClass>
-                    <name>TissueDamageInjury</name>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The rate of hemorrhage measured in mL per minute</semantics>
+                </attribute>
+                <attribute>
+                    <name>totalBodySurfaceArea</name>
+                    <dataType>FloatType32BE</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
-                    <semantics>Describes the type of issue damaged in a soft tissue injury. Requires an additional severity score.</semantics>
-                    <attribute>
-                        <name>tissueType</name>
-                        <dataType>TissueTypeEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The type of tissue that is damaged.</semantics>
-                    </attribute>
-                </objectClass>
-                <objectClass>
-                    <name>ImmuneResponseInjury</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>This class identifies the general type of immune response to model. Ideally, a specific disease will be selected from InjuryType to allow the engine to model that specific disease. However if that model is not available, this class can be used to indicate a generic type of immune response.</semantics>
-                    <attribute>
-                        <name>immuneTrigger</name>
-                        <dataType>ImmuneTriggerEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Type of immune response.</semantics>
-                    </attribute>
-                </objectClass>
-                <objectClass>
-                    <name>RadiationInjury</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>Describes the radiation dose. Requires an additional severity score.</semantics>
-                    <attribute>
-                        <name>exposureTime</name>
-                        <dataType>Integer32BE</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The time of exposure to the radiation, expressed in seconds.</semantics>
-                    </attribute>
-                </objectClass>
-                <objectClass>
-                    <name>ChemicaIngestionlInjury</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>Describes a chemical or poison ingestion. Does not require an additional severity score.</semantics>
-                    <attribute>
-                        <name>chemicalPH</name>
-                        <dataType>FloatType32BE</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>pH of the chemical (used instead of identifying the specific chemical to allow for more general reactions).</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>chemicalExposure</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Identifies if the exposure was external (surface contact) or internal (injected or ingested). 0 = external, 1 = internal</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>chemicalDosage</name>
-                        <dataType>FloatType32BE</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Dosage of the chemical, expressed in mL or mg</semantics>
-                    </attribute>
-                </objectClass>
-                <objectClass>
-                    <name>EnvenomationInjury</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>Describes the venom dose. Does not require an additional severity score.</semantics>
-                    <attribute>
-                        <name>venomType</name>
-                        <dataType>VenomTypeEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>The classification of the venom type. The type affects the body’s response to the venom.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>venomDose</name>
-                        <dataType>FloatType32BE</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Amount of venom measured in mL or mg.</semantics>
-                    </attribute>
-                </objectClass>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>The percentage of body area covered by the burn, expressed as a decimal (0.25 = 25% TBSA)</semantics>
+                </attribute>
             </objectClass>
             <objectClass>
                 <name>Treatment</name>
@@ -673,7 +620,7 @@ Naming Convention: Treatment_uniquevalue</semantics>
                 </attribute>
                 <attribute>
                     <name>treatmentLocation</name>
-                    <dataType>BodyAreaCoarseArray</dataType>
+                    <dataType>BodyLocationRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on creation or change</updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -698,15 +645,15 @@ Naming Convention: Treatment_uniquevalue</semantics>
                     <sharing>PublishSubscribe</sharing>
                     <semantics>This class covers items that are given in measured dosages including drugs, fluids and other medications.</semantics>
                     <attribute>
-                        <name>medicationName</name>
-                        <dataType>HLAASCIIstring</dataType>
+                        <name>medication</name>
+                        <dataType>MedicationEnum</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
                         <ownership>NoTransfer</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
-                        <semantics>Specific name of the medication, if needed. May be null.</semantics>
+                        <semantics>Name of the medication being administered</semantics>
                     </attribute>
                     <attribute>
                         <name>administrationRoute</name>
@@ -751,193 +698,6 @@ Naming Convention: Treatment_uniquevalue</semantics>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
                         <semantics>Indicates if a medication administration (e.g. drip) is active.  True/1 = active, or False/0 = stopped.  If active, the rate calculations continue until the attribute changes to 0.  Bolus dosages will be 0.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>analgesics</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type an analgesic?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>sedation</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a sedative?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>paralytics</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication a paralytic?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>pressers</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a vasopresser?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>overdoseTreatment</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the treatment an overdoseTreatment?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>antiEmetics</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type an anti emetic?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>anaphylaxisTreatment</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>On create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type an anaphylaxis?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>respiratoryTreatment</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a respiratory treatment?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>hypoglycemiaTreatment</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a hypoglycemiaTreatment?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>cbrneTreatment</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a CBRNE treatment?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>seizureTreatment</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a seizure treatment?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>bloodProducts</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a blood product?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>nutrition</name>
-                        <dataType>HLAboolean</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a nutrition product?</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>infectionMedication</name>
-                        <dataType>InfectionFunctionEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type for infection?  If yes, select an enumeration.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>clottingMedication</name>
-                        <dataType>ClottingFunctionEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type for clotting?  If yes, select an enumeration.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>cardiacMedication</name>
-                        <dataType>CardiacFunctionEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type for cardiac?  If yes, select an enumeration.</semantics>
-                    </attribute>
-                    <attribute>
-                        <name>fluidMedication</name>
-                        <dataType>FluidFunctionEnum</dataType>
-                        <updateType>Conditional</updateType>
-                        <updateCondition>on create or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
-                        <sharing>PublishSubscribe</sharing>
-                        <transportation>HLAreliable</transportation>
-                        <order>Receive</order>
-                        <semantics>Is the medication type a fluid medication?  If yes, select an enumeration.</semantics>
                     </attribute>
                 </objectClass>
                 <objectClass>
@@ -2026,7 +1786,7 @@ Unique string ID representing the patient.  Links patient with injury, treatment
             <enumeratedData>
                 <name>InjuryTypeEnum</name>
                 <representation>HLAinteger32BE</representation>
-                <semantics>Each InjuryType will have a location and effect associated with it.</semantics>
+                <semantics>Describe the physiological description of the injury.</semantics>
                 <enumerator>
                     <name>notApplicable</name>
                     <value>0</value>
@@ -2036,44 +1796,36 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                     <value>1</value>
                 </enumerator>
                 <enumerator>
-                    <name>jointDislocation</name>
+                    <name>airwayObstruction</name>
                     <value>2</value>
                 </enumerator>
                 <enumerator>
-                    <name>compromisedAirway</name>
+                    <name>fracture</name>
                     <value>3</value>
                 </enumerator>
                 <enumerator>
-                    <name>fracture</name>
+                    <name>traumaticBrainInjury</name>
                     <value>4</value>
                 </enumerator>
                 <enumerator>
-                    <name>traumaticBrainInjury</name>
+                    <name>pneumothorax</name>
                     <value>5</value>
                 </enumerator>
                 <enumerator>
-                    <name>laceration</name>
+                    <name>tensionPneumothorax</name>
                     <value>6</value>
                 </enumerator>
                 <enumerator>
-                    <name>pneumothorax</name>
+                    <name>hemothorax</name>
                     <value>7</value>
                 </enumerator>
                 <enumerator>
-                    <name>tensionPneumothorax</name>
+                    <name>burn</name>
                     <value>8</value>
                 </enumerator>
                 <enumerator>
-                    <name>hemothorax</name>
+                    <name>compartmentalPressure</name>
                     <value>9</value>
-                </enumerator>
-                <enumerator>
-                    <name>burn</name>
-                    <value>10</value>
-                </enumerator>
-                <enumerator>
-                    <name>compartmentPressure</name>
-                    <value>11</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
@@ -2355,135 +2107,6 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
-                <name>BurnTypeEnum</name>
-                <representation>HLAinteger32BE</representation>
-                <semantics>Types of burns.</semantics>
-                <enumerator>
-                    <name>notApplicable</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>thermal</name>
-                    <value>1</value>
-                </enumerator>
-                <enumerator>
-                    <name>chemical</name>
-                    <value>2</value>
-                </enumerator>
-                <enumerator>
-                    <name>electrical</name>
-                    <value>3</value>
-                </enumerator>
-            </enumeratedData>
-            <enumeratedData>
-                <name>BurnDegreeEnum</name>
-                <representation>HLAinteger32BE</representation>
-                <semantics>Degrees of burn.</semantics>
-                <enumerator>
-                    <name>notApplicable</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>firstDegree</name>
-                    <value>1</value>
-                </enumerator>
-                <enumerator>
-                    <name>secondDegree</name>
-                    <value>2</value>
-                </enumerator>
-                <enumerator>
-                    <name>thirdDegree</name>
-                    <value>3</value>
-                </enumerator>
-            </enumeratedData>
-            <enumeratedData>
-                <name>TissueTypeEnum</name>
-                <representation>HLAinteger32BE</representation>
-                <semantics>Types of tissue that might be injured.</semantics>
-                <enumerator>
-                    <name>notApplicable</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>muscle</name>
-                    <value>1</value>
-                </enumerator>
-                <enumerator>
-                    <name>skin</name>
-                    <value>2</value>
-                </enumerator>
-                <enumerator>
-                    <name>tendon</name>
-                    <value>3</value>
-                </enumerator>
-                <enumerator>
-                    <name>ligament</name>
-                    <value>4</value>
-                </enumerator>
-                <enumerator>
-                    <name>organ</name>
-                    <value>5</value>
-                </enumerator>
-                <enumerator>
-                    <name>fat</name>
-                    <value>6</value>
-                </enumerator>
-                <enumerator>
-                    <name>cartilage</name>
-                    <value>7</value>
-                </enumerator>
-            </enumeratedData>
-            <enumeratedData>
-                <name>ImmuneTriggerEnum</name>
-                <representation>HLAinteger32BE</representation>
-                <semantics>Types of immunological triggers.</semantics>
-                <enumerator>
-                    <name>notApplicable</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>viral</name>
-                    <value>1</value>
-                </enumerator>
-                <enumerator>
-                    <name>bacterial</name>
-                    <value>2</value>
-                </enumerator>
-                <enumerator>
-                    <name>parasitic</name>
-                    <value>3</value>
-                </enumerator>
-                <enumerator>
-                    <name>airwayAllergen</name>
-                    <value>4</value>
-                </enumerator>
-                <enumerator>
-                    <name>inflammatory</name>
-                    <value>5</value>
-                </enumerator>
-            </enumeratedData>
-            <enumeratedData>
-                <name>VenomTypeEnum</name>
-                <representation>HLAinteger32BE</representation>
-                <semantics>Types of venom.</semantics>
-                <enumerator>
-                    <name>notApplicable</name>
-                    <value>0</value>
-                </enumerator>
-                <enumerator>
-                    <name>cytotoxin</name>
-                    <value>1</value>
-                </enumerator>
-                <enumerator>
-                    <name>neurotoxin</name>
-                    <value>2</value>
-                </enumerator>
-                <enumerator>
-                    <name>hemotoxin</name>
-                    <value>3</value>
-                </enumerator>
-            </enumeratedData>
-            <enumeratedData>
                 <name>LevelOfResponseEnum</name>
                 <representation>HLAinteger32BE</representation>
                 <semantics>AVPU is a scale used to quickly identify the responsiveness of a patient to various stimuli. 
@@ -2509,6 +2132,536 @@ Unresponsive: Sometimes noted as 'Unconscious'.</semantics>
                 </enumerator>
                 <enumerator>
                     <name>unresponsive</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>GunshotCaliberEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Caliber of gunshot if known.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>caliber22lr</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>caliber9mm</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>caliber10mm</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>caliber50bmg</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>caliber556x45</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>caliber762x51</name>
+                    <value>7</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>GunshotAmmunitionTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of ammunition.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>fullMetalJacket</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>hollowPoint</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>armorPiercing</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>incendiary</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>BladeTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of blades.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>serrated_Short</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>serrated_Medium</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>serrated_Long</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>smooth_Short</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>smooth_Medium</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>smooth_Long</name>
+                    <value>7</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>BlastTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Type of blast causing the injury.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>IED_Mounted</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>IED_Dismounted</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>grenade</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>RPG</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>indirect</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>highYieldExplosive</name>
+                    <value>7</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>VehicleCrashEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of vehicles that could cause injury.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>groundVehicleCrash</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>groundVehicleImpact</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>aircraftCrash</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>FallTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Enumeration of fall types.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>under5Feet</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>between5And10Feet</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>over10Feet</name>
+                    <value>4</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>CBRNTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Enumeration of CBRN types if known.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>chemical</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>biological</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>radiological</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>nuclear</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>ShrapnelTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Types of shrapnel.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>unknown</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>round_Small</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>round_Medium</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>round_Large</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>jagged_Small</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>jagged_Medium</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>jagged_Large</name>
+                    <value>7</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>InjuryDescriptionEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Physical type of injury.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>amputation</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>laceration</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>puncture</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>penetrating</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>blunt</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>sprain</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>crush</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>dislocation</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>exposure</name>
+                    <value>9</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>EcgRhythmEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Identifies the ECG rhythm of the patient (does not draw the waveform). 
+ 
+Source: https://www.aclsmedicaltraining.com/rhythm-recognition/</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>normalSinus</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>firstDegreeHeartBlock</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>secondDegreeAVHeartBlock</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>thirdDegreeHeartBlock</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>supraventricularTachycardia</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>ventricularTachycardia</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>ventricularFibrillation</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>atrialFibrillation</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>atrialFlutter</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>asystole</name>
+                    <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>pulselessElectricalActivity</name>
+                    <value>11</value>
+                </enumerator>
+                <enumerator>
+                    <name>pulselessVentricularTachycardia</name>
+                    <value>12</value>
+                </enumerator>
+                <enumerator>
+                    <name>longQT</name>
+                    <value>13</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>HeartSoundEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>notApplicable is to indicate not applicable, while null is specifically for an absence of sounds to indicate a critical diagnostic criteria. 
+ 
+Heart sound source: TruMonitor and https://depts.washington.edu/physdx/heart/demo.html</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>normal</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>murmur</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>aorticStenosisEarly</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>aorticStenosisLate</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>mitralRegurgitation</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>mitralStenosis</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>pulmonicStenosis</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>aorticInsufficiency</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>atrialSeptalDefect</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>ventricularSeptalDefect</name>
+                    <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>tricuspidRegurgitation</name>
+                    <value>11</value>
+                </enumerator>
+                <enumerator>
+                    <name>patentDuctusAsteriosus</name>
+                    <value>12</value>
+                </enumerator>
+                <enumerator>
+                    <name>s2</name>
+                    <value>13</value>
+                </enumerator>
+                <enumerator>
+                    <name>s3</name>
+                    <value>14</value>
+                </enumerator>
+                <enumerator>
+                    <name>s4</name>
+                    <value>15</value>
+                </enumerator>
+                <enumerator>
+                    <name>pericardialRub</name>
+                    <value>16</value>
+                </enumerator>
+                <enumerator>
+                    <name>null</name>
+                    <value>17</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>LungSoundEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>notApplicable is to indicate not applicable, while null is specifically for an absence of sounds to indicate a critical diagnostic criteria. 
+ 
+Lung sound source: TruMonitor and https://www.mountsinai.org/health-library/symptoms/breath-sounds</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>normal</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>cracklesCoarse</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>cracklesFine</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>pleuralRub</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>rhonchi</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>stridor</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>wheeze</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>null</name>
+                    <value>8</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>BowelSoundEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>notApplicable is to indicate not applicable, while null is specifically for an absence of sounds to indicate a critical diagnostic criteria. 
+ 
+Bowel sound source: TruMonitor and https://centreforgastrointestinalhealth.com.au/resources/stomach-making-noises/</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>normal</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>hyperactiveBowels</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>hypoactiveBowels</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>null</name>
+                    <value>4</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>PupilSizeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics></semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>normal</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>dilated</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>constricted</name>
                     <value>3</value>
                 </enumerator>
             </enumeratedData>
@@ -2553,6 +2706,51 @@ Unresponsive: Sometimes noted as 'Unconscious'.</semantics>
                     <name>rashScab</name>
                     <dataType>HLAboolean</dataType>
                     <semantics>Indicate if the rash has scabbed areas. True/1 = scabbed, False/0 = not scabbed.</semantics>
+                </field>
+            </fixedRecordData>
+            <fixedRecordData>
+                <name>MechanismOfInjuryRecord</name>
+                <encoding>HLAfixedRecord</encoding>
+                <semantics>Mechanisms of injury.</semantics>
+                <field>
+                    <name>gunshotCaliber</name>
+                    <dataType>GunshotCaliberEnum</dataType>
+                    <semantics>Gunshot, caliber of bullet.  May be null.</semantics>
+                </field>
+                <field>
+                    <name>gunshotAmmunitionType</name>
+                    <dataType>GunshotAmmunitionTypeEnum</dataType>
+                    <semantics>Gunshot, type of ammunition.  May be null.</semantics>
+                </field>
+                <field>
+                    <name>blade</name>
+                    <dataType>BladeTypeEnum</dataType>
+                    <semantics>Description of the type of blade causing the injury.  May be null.</semantics>
+                </field>
+                <field>
+                    <name>blast</name>
+                    <dataType>BlastTypeEnum</dataType>
+                    <semantics>Description of the type of blast causing the injury.  May be null.</semantics>
+                </field>
+                <field>
+                    <name>vehicleCrash</name>
+                    <dataType>VehicleCrashEnum</dataType>
+                    <semantics>Description of the type of vehicle crash causing the injury.  May be null.</semantics>
+                </field>
+                <field>
+                    <name>fall</name>
+                    <dataType>FallTypeEnum</dataType>
+                    <semantics>Description of the type of fall causing the injury.  May be null.</semantics>
+                </field>
+                <field>
+                    <name>cbrn</name>
+                    <dataType>CBRNTypeEnum</dataType>
+                    <semantics>General description of the type of chemical causing the injury.  May be null.</semantics>
+                </field>
+                <field>
+                    <name>shrapnel</name>
+                    <dataType>ShrapnelTypeEnum</dataType>
+                    <semantics>Description of the type of shrapnel causing the injury.  May be null.</semantics>
                 </field>
             </fixedRecordData>
         </fixedRecordDataTypes>

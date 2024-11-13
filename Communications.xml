@@ -176,7 +176,7 @@ Typical entries are USCIV, NON US, USA, USAF, CG, USN, USMC</semantics>
                 </attribute>
                 <attribute>
                     <name>mechanismOfInjury</name>
-                    <dataType>MechanismOfInjuryRecord</dataType>
+                    <dataType>MechanismOfInjuryCommsRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
                     <ownership>NoTransfer</ownership>
@@ -2696,7 +2696,7 @@ true = checked</semantics>
                 </field>
             </fixedRecordData>
             <fixedRecordData>
-                <name>MechanismOfInjuryRecord</name>
+                <name>MechanismOfInjuryCommsRecord</name>
                 <encoding>HLAfixedRecord</encoding>
                 <semantics>[DD1380] 
 Mark an “X” on the mechanism or cause of injury (artillery, blunt, burn, fall, grenade, gunshot wound (GSW), improvised explosive device (IED), landmine, motor vehicle crash/collision (MVC), rocket-propelled grenade (RPG), other (specify)). Mark all that apply.</semantics>
@@ -4239,7 +4239,7 @@ For the Annotate Injuries section of the DA4700, associate an injury with a loca
                 </field>
                 <field>
                     <name>injuryLocation</name>
-                    <dataType>BodyAreaFineArray</dataType>
+                    <dataType>BodyLocationRecord</dataType>
                     <semantics>Location or locations/area of injury.  A single element array indicates an injury associated with a particular body location.  Multiple array values indicate an injury associated with an area of the body.</semantics>
                 </field>
             </fixedRecordData>
@@ -4328,7 +4328,7 @@ Associate an injury with a location on the body.  Used in the Injury section of 
                 </field>
                 <field>
                     <name>injuryLocation</name>
-                    <dataType>BodyAreaCoarseArray</dataType>
+                    <dataType>BodyLocationRecord</dataType>
                     <semantics>Coarse Body Location/locations for DD1380.  Empty array indicates an injury not associated with a particular location on the body.  A single element array indicates an injury associated with a particular body location.  Multiple array values indicate an injury associated with an area of the body.</semantics>
                 </field>
             </fixedRecordData>
@@ -5083,7 +5083,7 @@ Expectant (Black triage tag)</semantics>
                 </field>
                 <field>
                     <name>injuryLocation</name>
-                    <dataType>BodyAreaCoarseArray</dataType>
+                    <dataType>BodyLocationRecord</dataType>
                     <semantics>Array of locations where the injury occurred.  Empty array indicates an injury not associated with a particular location on the body.  A single element array indicates an injury associated with a particular body location.  Multiple array values indicate an injury associated with an area of the body.</semantics>
                 </field>
                 <field>

@@ -152,6 +152,17 @@ Allows determination of when the event took place in epoch time.</semantics>
                     <order>Receive</order>
                     <semantics>A longer description of the contents of the notes attribute.</semantics>
                 </attribute>
+                <attribute>
+                    <name>learnerAction</name>
+                    <dataType>LearnerActionEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>on creation or change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>An action taken by the learner that is not a direct treatment for the patient.</semantics>
+                </attribute>
             </objectClass>
             <objectClass>
                 <name>Learner</name>
@@ -388,6 +399,99 @@ Allows determination of when the event took place in epoch time.</semantics>
                 <enumerator>
                     <name>learnerAction</name>
                     <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>LearnerActionEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Actions taken by the learner that are not a direct treatment for the patient.</semantics>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>prepareEquipment</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>donPPE</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>positionPatient</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>exposePatient</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>relocatePatient</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>extricatePatientFromVehicle</name>
+                    <value>6</value>
+                </enumerator>
+                <enumerator>
+                    <name>locateAnatomicalLandmarks</name>
+                    <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>suctionAirway</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>catheterizePatient</name>
+                    <value>9</value>
+                </enumerator>
+                <enumerator>
+                    <name>communicateWithPatient</name>
+                    <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>assessBleeding</name>
+                    <value>11</value>
+                </enumerator>
+                <enumerator>
+                    <name>assessAirway</name>
+                    <value>12</value>
+                </enumerator>
+                <enumerator>
+                    <name>assessBreathing</name>
+                    <value>13</value>
+                </enumerator>
+                <enumerator>
+                    <name>assessCirculation</name>
+                    <value>14</value>
+                </enumerator>
+                <enumerator>
+                    <name>monitorPatient</name>
+                    <value>15</value>
+                </enumerator>
+                <enumerator>
+                    <name>performTraumaExam</name>
+                    <value>16</value>
+                </enumerator>
+                <enumerator>
+                    <name>measurePatientResponsiveness</name>
+                    <value>17</value>
+                </enumerator>
+                <enumerator>
+                    <name>collectBloodSample</name>
+                    <value>18</value>
+                </enumerator>
+                <enumerator>
+                    <name>collectUrineSample</name>
+                    <value>19</value>
+                </enumerator>
+                <enumerator>
+                    <name>placeECGLeads</name>
+                    <value>20</value>
+                </enumerator>
+                <enumerator>
+                    <name>createSterileField</name>
+                    <value>21</value>
                 </enumerator>
             </enumeratedData>
         </enumeratedDataTypes>
