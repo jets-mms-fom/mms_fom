@@ -177,6 +177,127 @@ Saves will be preceded with a pause so that simulations can save their state wit
                     <semantics></semantics>
                 </attribute>
             </objectClass>
+            <objectClass>
+                <name>VitalsDisplayStatus</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Controls the visibility of individual vital signs for a given patient.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to a vitals visibility status object.</semantics>
+                </attribute>
+                <attribute>
+                    <name>heartRateVisible</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>0 = not visible.</semantics>
+                </attribute>
+                <attribute>
+                    <name>bloodPressureVisible</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>0 = not visible, 1 = visible. 
+Controls both systolic and diastolic visibility.</semantics>
+                </attribute>
+                <attribute>
+                    <name>oxygenSaturationVisible</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>0 = not visible.</semantics>
+                </attribute>
+                <attribute>
+                    <name>temperatureVisible</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>0 = not visible.</semantics>
+                </attribute>
+                <attribute>
+                    <name>endTidalCarbonDioxideVisible</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>0 = not visible.</semantics>
+                </attribute>
+                <attribute>
+                    <name>respirationRateVisible</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>0 = not visible.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>FederateAssociation</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Associates federates to other identifiers (in this case, to facilities and patients). This object is just used for a federate to declare what site is associated with and which patient(s) it cares about.</semantics>
+                <attribute>
+                    <name>federateName</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Name of the federate.</semantics>
+                </attribute>
+                <attribute>
+                    <name>facilityIds</name>
+                    <dataType>facilityIdArray</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Which facility(ies) is the federate associated with?</semantics>
+                </attribute>
+                <attribute>
+                    <name>patientIds</name>
+                    <dataType>patientIdArray</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>NoTransfer</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Which patient(s) is the federate associated with?</semantics>
+                </attribute>
+            </objectClass>
         </objectClass>
     </objects>
     <interactions>
@@ -322,6 +443,28 @@ Saves will be preceded with a pause so that simulations can save their state wit
                     <semantics></semantics>
                 </parameter>
             </interactionClass>
+            <interactionClass>
+                <name>VitalsDisplayControl</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Control which vital signs are visible (1) or not (0)</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics></semantics>
+                </parameter>
+                <parameter>
+                    <name>toggleVitalSignVisibility</name>
+                    <dataType>HLAboolean</dataType>
+                    <semantics>0 = not visible</semantics>
+                </parameter>
+                <parameter>
+                    <name>visibleVitalSign</name>
+                    <dataType>VisibleVitalSignEnum</dataType>
+                    <semantics>Select which vital sign is changing visibility.</semantics>
+                </parameter>
+            </interactionClass>
         </interactionClass>
     </interactions>
     <switches>
@@ -370,8 +513,52 @@ Saves will be preceded with a pause so that simulations can save their state wit
                     <value>5</value>
                 </enumerator>
             </enumeratedData>
+            <enumeratedData>
+                <name>VisibleVitalSignEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Vital signs that may be visible.</semantics>
+                <enumerator>
+                    <name>heartRate</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>bloodPressure</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>oxygenSaturation</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>temperature</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>endTidalCarbonDioxide</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>respirationRate</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
         </enumeratedDataTypes>
-        <arrayDataTypes/>
+        <arrayDataTypes>
+            <arrayData>
+                <name>facilityIdArray</name>
+                <dataType>HLAASCIIstring</dataType>
+                <cardinality>Dynamic</cardinality>
+                <encoding>HLAvariableArray</encoding>
+                <semantics>Array of facility(ies).</semantics>
+            </arrayData>
+            <arrayData>
+                <name>patientIdArray</name>
+                <dataType>HLAASCIIstring</dataType>
+                <cardinality>Dynamic</cardinality>
+                <encoding>HLAvariableArray</encoding>
+                <semantics>List of patient(s).</semantics>
+            </arrayData>
+        </arrayDataTypes>
         <fixedRecordDataTypes/>
         <variantRecordDataTypes/>
     </dataTypes>

@@ -37,7 +37,7 @@ Multiple Patient instances may be created.  Each Patient instance may have zero 
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -50,7 +50,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -61,7 +61,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>When the attribute is updated</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -72,7 +72,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -83,7 +83,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>When the attribute is changed</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -95,7 +95,7 @@ Blood Oxygen Level expressed as real value .80 = 80%</semantics>
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>When the attribute is updated.</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -106,7 +106,7 @@ Blood Oxygen Level expressed as real value .80 = 80%</semantics>
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -117,7 +117,7 @@ Blood Oxygen Level expressed as real value .80 = 80%</semantics>
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -129,11 +129,11 @@ Blood Oxygen Level expressed as real value .80 = 80%</semantics>
                 <sharing>PublishSubscribe</sharing>
                 <semantics>Physiology internal respiratory parameters.  Ground truth.</semantics>
                 <attribute>
-                    <name>patientID</name>
+                    <name>patientId</name>
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -146,7 +146,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -157,7 +157,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -168,7 +168,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -179,7 +179,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -190,7 +190,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -201,7 +201,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -219,7 +219,7 @@ Note that some measurable signs are modeled in the Physiology class.  A "Signs" 
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -232,7 +232,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>BodyLocationRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -243,7 +243,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAboolean</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -254,7 +254,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>SkinColorEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -265,7 +265,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>SkinRashRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -276,7 +276,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAboolean</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -287,7 +287,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>CoughEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -298,7 +298,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>EcgRhythmEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -309,7 +309,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HeartSoundEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -320,7 +320,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>LungSoundEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -331,7 +331,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>BowelSoundEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -342,11 +342,22 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>PupilSizeEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
                     <semantics>Describes the pupil size.</semantics>
+                </attribute>
+                <attribute>
+                    <name>shivering</name>
+                    <dataType>HLAboolean</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On Change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>0 = not shivering</semantics>
                 </attribute>
             </objectClass>
             <objectClass>
@@ -359,7 +370,7 @@ See Signs class for additional information</semantics>
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -372,7 +383,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>BodyLocationRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -383,7 +394,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAboolean</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -394,7 +405,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAboolean</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -405,7 +416,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -416,7 +427,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAboolean</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -427,7 +438,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAboolean</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -438,7 +449,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>VisionDisturbanceEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -893,7 +904,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -906,7 +917,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>GlasgowComaScaleRecord</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -917,7 +928,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>LevelOfResponseEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -928,7 +939,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>LevelOfConsciousnessEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -944,7 +955,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -957,7 +968,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAinteger64Time</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>on creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -972,7 +983,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -983,7 +994,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -994,7 +1005,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1005,7 +1016,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1016,7 +1027,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1027,7 +1038,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1038,7 +1049,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1049,7 +1060,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1060,7 +1071,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1071,7 +1082,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1082,7 +1093,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1093,7 +1104,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1104,7 +1115,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1115,7 +1126,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1126,7 +1137,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1137,7 +1148,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1148,7 +1159,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>on creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1166,7 +1177,7 @@ The datatypes and values associated with each attribute are what would be determ
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1177,7 +1188,7 @@ The datatypes and values associated with each attribute are what would be determ
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1188,7 +1199,7 @@ The datatypes and values associated with each attribute are what would be determ
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1199,7 +1210,7 @@ The datatypes and values associated with each attribute are what would be determ
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1210,7 +1221,7 @@ The datatypes and values associated with each attribute are what would be determ
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1221,7 +1232,7 @@ The datatypes and values associated with each attribute are what would be determ
                         <dataType>Integer32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1232,7 +1243,7 @@ The datatypes and values associated with each attribute are what would be determ
                         <dataType>HLAboolean</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1245,7 +1256,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1256,7 +1267,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1267,7 +1278,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1278,7 +1289,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>Integer32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1289,7 +1300,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1300,7 +1311,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1311,7 +1322,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1322,7 +1333,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1333,7 +1344,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1344,7 +1355,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1355,7 +1366,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1366,7 +1377,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1382,7 +1393,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1393,7 +1404,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1404,7 +1415,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1415,7 +1426,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1426,7 +1437,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>FloatType32BE</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1442,7 +1453,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>BloodTypeEnum</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation or change</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1458,7 +1469,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>HLAASCIIstring</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1469,7 +1480,7 @@ False - blood cells are whole (undamaged)</semantics>
                         <dataType>HLAASCIIstring</dataType>
                         <updateType>Conditional</updateType>
                         <updateCondition>On creation</updateCondition>
-                        <ownership>NoTransfer</ownership>
+                        <ownership>DivestAcquire</ownership>
                         <sharing>PublishSubscribe</sharing>
                         <transportation>HLAreliable</transportation>
                         <order>Receive</order>
@@ -1515,7 +1526,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>HLAASCIIstring</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -1528,7 +1539,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -1539,7 +1550,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -1550,7 +1561,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
@@ -1561,11 +1572,60 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <dataType>FloatType32BE</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On creation or change</updateCondition>
-                    <ownership>NoTransfer</ownership>
+                    <ownership>DivestAcquire</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
                     <semantics>Amount of fluid lost as sweat, in mL. May be null if this quantity is not modeled.</semantics>
+                </attribute>
+            </objectClass>
+            <objectClass>
+                <name>CasualtyState</name>
+                <sharing>PublishSubscribe</sharing>
+                <semantics>Places a patient in a facility and describes the evacuation/triage state of the patient.</semantics>
+                <attribute>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Static</updateType>
+                    <updateCondition>On creation</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>patientId associates a particular patient to the object.</semantics>
+                </attribute>
+                <attribute>
+                    <name>facilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>A unique identifier for a facility.</semantics>
+                </attribute>
+                <attribute>
+                    <name>evacuationPriority</name>
+                    <dataType>EvacuationPriorityEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Evacuation priority of the casualty.</semantics>
+                </attribute>
+                <attribute>
+                    <name>triageClassification</name>
+                    <dataType>TriageEnum</dataType>
+                    <updateType>Conditional</updateType>
+                    <updateCondition>On change</updateCondition>
+                    <ownership>DivestAcquire</ownership>
+                    <sharing>PublishSubscribe</sharing>
+                    <transportation>HLAreliable</transportation>
+                    <order>Receive</order>
+                    <semantics>Triage classification of the casualty.</semantics>
                 </attribute>
             </objectClass>
         </objectClass>
@@ -1765,6 +1825,29 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                     <semantics>Identifies which patient to resume modeling.</semantics>
                 </parameter>
             </interactionClass>
+            <interactionClass>
+                <name>MagicVitals</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Allow a non-owning federate to "request" a change to vitals to the owning federate.  The owner may acknowledge or ignore the request. 
+</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Patient whose vitals may be updated.</semantics>
+                </parameter>
+                <parameter>
+                    <name>magicVital</name>
+                    <dataType>MagicVitalsEnum</dataType>
+                    <semantics>Enumeration of the vitals that may be updated.</semantics>
+                </parameter>
+                <parameter>
+                    <name>magicVitalValue</name>
+                    <dataType>FloatType32BE</dataType>
+                    <semantics>Value of the vital to be updated.</semantics>
+                </parameter>
+            </interactionClass>
         </interactionClass>
     </interactions>
     <switches>
@@ -1845,7 +1928,7 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                     <value>2</value>
                 </enumerator>
                 <enumerator>
-                    <name>comotose</name>
+                    <name>comatose</name>
                     <value>3</value>
                 </enumerator>
                 <enumerator>
@@ -1863,6 +1946,14 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                 <enumerator>
                     <name>dead</name>
                     <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>unconscious</name>
+                    <value>8</value>
+                </enumerator>
+                <enumerator>
+                    <name>paralyzed</name>
+                    <value>9</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
@@ -1912,6 +2003,10 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                 <enumerator>
                     <name>intradermal</name>
                     <value>10</value>
+                </enumerator>
+                <enumerator>
+                    <name>nasal</name>
+                    <value>11</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
@@ -2029,7 +2124,7 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                 <representation>HLAinteger32BE</representation>
                 <semantics>Description of the type of cough.</semantics>
                 <enumerator>
-                    <name>n_a</name>
+                    <name>notApplicable</name>
                     <value>0</value>
                 </enumerator>
                 <enumerator>
@@ -2074,36 +2169,40 @@ Unique string ID representing the patient.  Links patient with injury, treatment
                 <representation>HLAinteger32BE</representation>
                 <semantics>Description of the type of vision anomaly.</semantics>
                 <enumerator>
-                    <name>distanceBlurred</name>
+                    <name>notApplicable</name>
                     <value>0</value>
                 </enumerator>
                 <enumerator>
-                    <name>nearBlurred</name>
+                    <name>distanceBlurred</name>
                     <value>1</value>
                 </enumerator>
                 <enumerator>
-                    <name>diplopiaVertical</name>
+                    <name>nearBlurred</name>
                     <value>2</value>
                 </enumerator>
                 <enumerator>
-                    <name>diplopiaHorizontal</name>
+                    <name>diplopiaVertical</name>
                     <value>3</value>
                 </enumerator>
                 <enumerator>
-                    <name>halos</name>
+                    <name>diplopiaHorizontal</name>
                     <value>4</value>
                 </enumerator>
                 <enumerator>
-                    <name>blindnessPartial</name>
+                    <name>halos</name>
                     <value>5</value>
                 </enumerator>
                 <enumerator>
-                    <name>blindnessTotal</name>
+                    <name>blindnessPartial</name>
                     <value>6</value>
                 </enumerator>
                 <enumerator>
-                    <name>tunnelVision</name>
+                    <name>blindnessTotal</name>
                     <value>7</value>
+                </enumerator>
+                <enumerator>
+                    <name>tunnelVision</name>
+                    <value>8</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
@@ -2570,7 +2669,7 @@ Heart sound source: TruMonitor and https://depts.washington.edu/physdx/heart/dem
                     <value>16</value>
                 </enumerator>
                 <enumerator>
-                    <name>null</name>
+                    <name>absent</name>
                     <value>17</value>
                 </enumerator>
             </enumeratedData>
@@ -2613,7 +2712,7 @@ Lung sound source: TruMonitor and https://www.mountsinai.org/health-library/symp
                     <value>7</value>
                 </enumerator>
                 <enumerator>
-                    <name>null</name>
+                    <name>absent</name>
                     <value>8</value>
                 </enumerator>
             </enumeratedData>
@@ -2640,14 +2739,14 @@ Bowel sound source: TruMonitor and https://centreforgastrointestinalhealth.com.a
                     <value>3</value>
                 </enumerator>
                 <enumerator>
-                    <name>null</name>
+                    <name>absent</name>
                     <value>4</value>
                 </enumerator>
             </enumeratedData>
             <enumeratedData>
                 <name>PupilSizeEnum</name>
                 <representation>HLAinteger32BE</representation>
-                <semantics></semantics>
+                <semantics>Describes the size of the patient pupil</semantics>
                 <enumerator>
                     <name>notApplicable</name>
                     <value>0</value>
@@ -2662,6 +2761,89 @@ Bowel sound source: TruMonitor and https://centreforgastrointestinalhealth.com.a
                 </enumerator>
                 <enumerator>
                     <name>constricted</name>
+                    <value>3</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>MagicVitalsEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Vital Signs that can be changed via the MagicVitals interaction</semantics>
+                <enumerator>
+                    <name>heartRate</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>diastolicBloodPressure</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>systolicBloodPressure</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>peripheralOxygenSaturation</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>temperatureFahrenheit</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>respirationEndTidalCarbonDioxide</name>
+                    <value>5</value>
+                </enumerator>
+                <enumerator>
+                    <name>respirationRate</name>
+                    <value>6</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>EvacuationPriorityEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Level of evacuation priority assigned to a patient.</semantics>
+                <enumerator>
+                    <name>urgent</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>urgentSurgical</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>priority</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>routine</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>convenience</name>
+                    <value>4</value>
+                </enumerator>
+                <enumerator>
+                    <name>notApplicable</name>
+                    <value>5</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>TriageEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Used to allocate treatment to patients based on their injury.</semantics>
+                <enumerator>
+                    <name>delayed</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>immediate</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>expectant</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>minimal</name>
                     <value>3</value>
                 </enumerator>
             </enumeratedData>

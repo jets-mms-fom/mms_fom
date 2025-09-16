@@ -4239,7 +4239,7 @@ For the Annotate Injuries section of the DA4700, associate an injury with a loca
                 </field>
                 <field>
                     <name>injuryLocation</name>
-                    <dataType>BodyLocationRecord</dataType>
+                    <dataType>BodyAreaCoarseArray</dataType>
                     <semantics>Location or locations/area of injury.  A single element array indicates an injury associated with a particular body location.  Multiple array values indicate an injury associated with an area of the body.</semantics>
                 </field>
             </fixedRecordData>
@@ -4328,7 +4328,7 @@ Associate an injury with a location on the body.  Used in the Injury section of 
                 </field>
                 <field>
                     <name>injuryLocation</name>
-                    <dataType>BodyLocationRecord</dataType>
+                    <dataType>BodyAreaCoarseArray</dataType>
                     <semantics>Coarse Body Location/locations for DD1380.  Empty array indicates an injury not associated with a particular location on the body.  A single element array indicates an injury associated with a particular body location.  Multiple array values indicate an injury associated with an area of the body.</semantics>
                 </field>
             </fixedRecordData>
@@ -5083,7 +5083,7 @@ Expectant (Black triage tag)</semantics>
                 </field>
                 <field>
                     <name>injuryLocation</name>
-                    <dataType>BodyLocationRecord</dataType>
+                    <dataType>BodyAreaCoarseArray</dataType>
                     <semantics>Array of locations where the injury occurred.  Empty array indicates an injury not associated with a particular location on the body.  A single element array indicates an injury associated with a particular body location.  Multiple array values indicate an injury associated with an area of the body.</semantics>
                 </field>
                 <field>

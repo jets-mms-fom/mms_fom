@@ -32,21 +32,6 @@ Army Techniques Publication No. 4-25.13 - Casualty Evacuation</description>
         <objectClass>
             <name>HLAobjectRoot</name>
             <objectClass>
-                <name>PatientMovementItemsEquipment</name>
-                <sharing>PublishSubscribe</sharing>
-                <semantics>Placeholder, to be expanded.</semantics>
-            </objectClass>
-            <objectClass>
-                <name>PatientMovementItemsSupplies</name>
-                <sharing>PublishSubscribe</sharing>
-                <semantics>Placeholder.  Originally meant to represent things like hoists and litters that would stay with the evacuation vehicle.</semantics>
-            </objectClass>
-            <objectClass>
-                <name>PointOfInjury</name>
-                <sharing>PublishSubscribe</sharing>
-                <semantics>Placeholder, to be expanded.</semantics>
-            </objectClass>
-            <objectClass>
                 <name>Facility</name>
                 <sharing>PublishSubscribe</sharing>
                 <semantics>Generally, describes any physical location that can provide medical support.  Ambulances/AE helos are mobile facilities while hospitals are fixed.</semantics>
@@ -62,17 +47,6 @@ Army Techniques Publication No. 4-25.13 - Casualty Evacuation</description>
                     <semantics>A unique Identifier for a facility.</semantics>
                 </attribute>
                 <attribute>
-                    <name>entityId</name>
-                    <dataType>HLAASCIIstring</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>On Creation</updateCondition>
-                    <ownership>NoTransfer</ownership>
-                    <sharing>Subscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>Used to associate a RpR Platform entity to a medical platform.</semantics>
-                </attribute>
-                <attribute>
                     <name>location</name>
                     <dataType>PhysicalLocationRecord</dataType>
                     <updateType>Conditional</updateType>
@@ -81,172 +55,41 @@ Army Techniques Publication No. 4-25.13 - Casualty Evacuation</description>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Represent the physical location of an entity</semantics>
+                    <semantics>Represent the physical location of the facility.</semantics>
                 </attribute>
                 <attribute>
-                    <name>maximumLitters</name>
-                    <dataType>Integer32BE</dataType>
-                    <updateType>Static</updateType>
-                    <updateCondition>on creation</updateCondition>
-                    <ownership>NoTransfer</ownership>
-                    <sharing>PublishSubscribe</sharing>
-                    <transportation>HLAreliable</transportation>
-                    <order>Receive</order>
-                    <semantics>The maximum number of litters should not change during an execution.  The number of available litters will change as patients are transported.</semantics>
-                </attribute>
-                <attribute>
-                    <name>availableLitters</name>
-                    <dataType>Integer32BE</dataType>
+                    <name>roleOfCare</name>
+                    <dataType>RoleOfCareEnum</dataType>
                     <updateType>Conditional</updateType>
                     <updateCondition>On change</updateCondition>
                     <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>When Platform is created, this value should be set to the value of Max_Litters.  As patients are loaded on litters, this value should be decremented. As patients are offloaded, the value should be incremented.</semantics>
+                    <semantics>Identifies the role of care the facility can support.</semantics>
                 </attribute>
                 <attribute>
-                    <name>maximumAmbulatory</name>
-                    <dataType>Integer32BE</dataType>
+                    <name>facilityType</name>
+                    <dataType>FacilityTypeEnum</dataType>
                     <updateType>Conditional</updateType>
-                    <updateCondition>On creation or change</updateCondition>
+                    <updateCondition>On change</updateCondition>
                     <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Maximum number of ambulatory patients a vehicle can accommodate.</semantics>
+                    <semantics>Describes the type of facility</semantics>
                 </attribute>
                 <attribute>
-                    <name>availableAmbulatory</name>
+                    <name>patientCapacity</name>
                     <dataType>Integer32BE</dataType>
                     <updateType>Conditional</updateType>
-                    <updateCondition>on creation or change</updateCondition>
+                    <updateCondition>on Change</updateCondition>
                     <ownership>NoTransfer</ownership>
                     <sharing>PublishSubscribe</sharing>
                     <transportation>HLAreliable</transportation>
                     <order>Receive</order>
-                    <semantics>Number of currently available ambulatory positions in a vehicle</semantics>
+                    <semantics>Maximum number of patients the facility can accomodate.</semantics>
                 </attribute>
-                <objectClass>
-                    <name>Fixed</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>This is the superclass for all fixed hospital facilities.</semantics>
-                    <objectClass>
-                        <name>SectionDepartment</name>
-                        <sharing>PublishSubscribe</sharing>
-                        <semantics>Placeholder.</semantics>
-                    </objectClass>
-                </objectClass>
-                <objectClass>
-                    <name>Mobile</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics>Indicates a medical treatment facility that is mobile (e.g. Ship, Plane, Ambulance).</semantics>
-                    <objectClass>
-                        <name>AirAmbulance</name>
-                        <sharing>Neither</sharing>
-                        <semantics>Any aircraft (fixed or rotary wing) capable of evacuating casualities.</semantics>
-                        <objectClass>
-                            <name>RotaryWing</name>
-                            <sharing>PublishSubscribe</sharing>
-                            <semantics>Rotary wing aircraft capable of evacuating casualities.</semantics>
-                            <objectClass>
-                                <name>Uh60</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                            <objectClass>
-                                <name>Ch47</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                            <objectClass>
-                                <name>Uh1H</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                        </objectClass>
-                        <objectClass>
-                            <name>FixedWing</name>
-                            <sharing>PublishSubscribe</sharing>
-                            <semantics>Fixed wing aircraft used for Aeromedical Evacuation</semantics>
-                            <objectClass>
-                                <name>C130</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                            <objectClass>
-                                <name>C21</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                            <objectClass>
-                                <name>C12</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                        </objectClass>
-                        <objectClass>
-                            <name>VTOL</name>
-                            <sharing>Neither</sharing>
-                            <semantics></semantics>
-                            <objectClass>
-                                <name>V22</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                        </objectClass>
-                    </objectClass>
-                    <objectClass>
-                        <name>GroundAmbulance</name>
-                        <sharing>PublishSubscribe</sharing>
-                        <semantics></semantics>
-                        <objectClass>
-                            <name>M1266A1</name>
-                            <sharing>PublishSubscribe</sharing>
-                            <semantics></semantics>
-                        </objectClass>
-                        <objectClass>
-                            <name>M113A3</name>
-                            <sharing>PublishSubscribe</sharing>
-                            <semantics></semantics>
-                        </objectClass>
-                        <objectClass>
-                            <name>HMMWV</name>
-                            <sharing>Neither</sharing>
-                            <semantics></semantics>
-                            <objectClass>
-                                <name>M996A1</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                            <objectClass>
-                                <name>M997A1</name>
-                                <sharing>PublishSubscribe</sharing>
-                                <semantics></semantics>
-                            </objectClass>
-                        </objectClass>
-                        <objectClass>
-                            <name>M1133</name>
-                            <sharing>PublishSubscribe</sharing>
-                            <semantics></semantics>
-                        </objectClass>
-                    </objectClass>
-                    <objectClass>
-                        <name>SHIP</name>
-                        <sharing>PublishSubscribe</sharing>
-                        <semantics>Ships capable of accepting casualties.</semantics>
-                        <objectClass>
-                            <name>MercyClass</name>
-                            <sharing>PublishSubscribe</sharing>
-                            <semantics></semantics>
-                        </objectClass>
-                    </objectClass>
-                </objectClass>
-                <objectClass>
-                    <name>FirstResponder</name>
-                    <sharing>PublishSubscribe</sharing>
-                    <semantics></semantics>
-                </objectClass>
             </objectClass>
         </objectClass>
     </objects>
@@ -310,7 +153,50 @@ Army Techniques Publication No. 4-25.13 - Casualty Evacuation</description>
     </switches>
     <dataTypes>
         <simpleDataTypes/>
-        <enumeratedDataTypes/>
+        <enumeratedDataTypes>
+            <enumeratedData>
+                <name>RoleOfCareEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Role of care provided by a facility.</semantics>
+                <enumerator>
+                    <name>role1</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>role2</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>role3</name>
+                    <value>2</value>
+                </enumerator>
+                <enumerator>
+                    <name>role4</name>
+                    <value>3</value>
+                </enumerator>
+                <enumerator>
+                    <name>enRoute</name>
+                    <value>4</value>
+                </enumerator>
+            </enumeratedData>
+            <enumeratedData>
+                <name>FacilityTypeEnum</name>
+                <representation>HLAinteger32BE</representation>
+                <semantics>Type of facility.</semantics>
+                <enumerator>
+                    <name>fixed</name>
+                    <value>0</value>
+                </enumerator>
+                <enumerator>
+                    <name>ground</name>
+                    <value>1</value>
+                </enumerator>
+                <enumerator>
+                    <name>air</name>
+                    <value>2</value>
+                </enumerator>
+            </enumeratedData>
+        </enumeratedDataTypes>
         <arrayDataTypes/>
         <fixedRecordDataTypes/>
         <variantRecordDataTypes/>

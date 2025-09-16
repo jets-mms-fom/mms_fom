@@ -70,7 +70,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <semantics>The type of evacuation transport vehicle requested.</semantics>
                 </parameter>
                 <parameter>
-                    <name>siteName</name>
+                    <name>facilityId</name>
                     <dataType>HLAASCIIstring</dataType>
                     <semantics>Name of destination for current route.</semantics>
                 </parameter>
@@ -99,7 +99,7 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <semantics>Vehicle id</semantics>
                 </parameter>
                 <parameter>
-                    <name>siteName</name>
+                    <name>facilityId</name>
                     <dataType>HLAASCIIstring</dataType>
                     <semantics>Name of destination for current route.</semantics>
                 </parameter>
@@ -117,6 +117,23 @@ Once a Patient object is created, the ID is static and cannot be changed or reus
                     <order>Receive</order>
                     <semantics>This interaction is used to respond to the medevac request to indicate acknowledgement of the request, vehicle enroute and vehicle arrival.</semantics>
                 </interactionClass>
+            </interactionClass>
+            <interactionClass>
+                <name>MagicTransfer</name>
+                <sharing>PublishSubscribe</sharing>
+                <transportation>HLAreliable</transportation>
+                <order>Receive</order>
+                <semantics>Used to bypass the set of Medevac requests for cases when there is no available federate to model the vehicle movements.</semantics>
+                <parameter>
+                    <name>patientId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Patient being transferred.</semantics>
+                </parameter>
+                <parameter>
+                    <name>facilityId</name>
+                    <dataType>HLAASCIIstring</dataType>
+                    <semantics>Facility the patient is being transferred to.</semantics>
+                </parameter>
             </interactionClass>
         </interactionClass>
     </interactions>
